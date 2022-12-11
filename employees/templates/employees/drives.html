@@ -1,0 +1,40 @@
+{% extends 'main.html' %} {% block content %}
+
+<div>
+  <form method="GET" action="{% url 'drives' %}">
+    <input type="text" name="q" placeholder="Search Drives..." />
+  </form>
+
+  <div>
+    <a href="{% url 'drives' %}">All</a>
+  </div>
+</div>
+
+<hr />
+
+<div>
+  <div>
+    <h3>
+      <p>Drive Count: {{ drive_count }}</p>
+      {% if request.user.is_authenticated %}
+      <a href="{% url 'create-drive'%}">Create New Drive</a>
+      {% endif %}
+    </h3>
+  </div>
+  {% for drive in drives %}
+  <div>
+    <div>Name: {{ drive.name }}</div>
+    <div>Description: {{ drive.description }}</div>
+    <div>Start Date: {{ drive.start_date }}</div>
+    <div>Required Funds: {{ drive.required_funds }}</div>
+    <div>Collected Funds: {{ drive.collected_funds }}</div>
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'update-drive' drive.id %}">Edit</a>
+    <a href="{% url 'terminate-drive' drive.id %}">Terminate</a>
+    {% endif %}
+    <hr />
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}

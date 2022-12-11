@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div>
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'create-department' %}">Create Department</a>
+    {% endif %}
+</div>
+
+<div>
+    {% for department in departments %}
+    <div>
+        <div>{{ department.name }}</div>
+        <div>{{ department.description }}</div>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'view-department-beneficiaries' department.name %}">View Benificiaries</a>
+        <a href="{% url 'update-department' department.id %}">Edit</a>
+        <a href="{% url 'remove-department' department.id %}">Delete</a>
+        {% endif %}
+        <hr>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock content %}

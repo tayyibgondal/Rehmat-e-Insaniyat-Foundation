@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div>
+    <form method="GET" action="{% url 'faqs' %}">
+        <input type="text" name="q" placeholder="Search FAQs...">
+    </form>
+
+    <div>
+        <a href="{% url 'faqs' %}">All</a>
+    </div>
+    <div>
+        {% if request.user.is_authenticated %}
+        {% else %}
+        <a href="{% url 'ask-question' %}">Ask a Question</a>
+        {% endif %}
+    </div>
+</div>
+
+<hr>
+
+<div>
+    {% for faq in faqs %}
+    <div>            
+        {% if request.user.is_authenticated %}
+            <h3><div>Question: {{ faq.question }}</div></h3>
+            {% if faq.answer == '' or faq.answer == None %}
+                <a href="{% url 'answer-question' faq.id %}">Add an Answer</a>
+            {% else %}
+            <div>Answer: {{ faq.answer }}</div>
+                <a href="{% url 'answer-question' faq.id %}">Edit</a>
+            {% endif %}
+            <a href="{% url 'remove-faq' faq.id %}">Remove</a>
+
+        {% else %}
+            {% if faq.answer == '' or faq.answer == None %}
+            {% else %}
+            <h3><div>Question: {{ faq.question }}</div></h3>
+            <div>Answer: {{ faq.answer }}</div>
+            <hr>
+            {% endif %}
+        {% endif %}
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock content %}

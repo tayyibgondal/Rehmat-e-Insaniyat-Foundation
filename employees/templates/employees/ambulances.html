@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div>
+    <form method="GET" action="{% url 'ambulances' %}">
+        <input type="text" name="q" placeholder="Search Ambulance...">
+    </form>
+
+    <div>
+        <a href="{% url 'ambulances' %}">All</a>
+    </div>
+</div>
+
+<hr>
+
+<div>
+    <h3>
+        <p>Ambulance Count: {{ ambulances_count }}</p>
+        <a href="{% url 'add-ambulance'%}">Add New Ambulance</a>
+    </h3>
+    
+    {% for ambulance in ambulances %}
+    <div>
+        <div>Plate Number: {{ ambulance.plate_no }}</div>
+        <div>Driver Name: {{ ambulance.driver.username}}</div>
+        <a href="{% url 'update-ambulance' ambulance.id %}">Change Driver</a>
+        <a href="{% url 'remove-ambulance' ambulance.id %}">Remove Ambulance</a>
+        <hr>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock content %}

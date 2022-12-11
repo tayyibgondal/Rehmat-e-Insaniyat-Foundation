@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div>
+    <form method="GET" action="{% url 'donations' %}">
+        <input type="text" name="q" placeholder="Search Donations...">
+    </form>
+
+    <div>
+        <a href="{% url 'donations' %}">All</a>
+    </div>
+</div>
+
+<hr>
+
+<div>
+{% for donation in donations %}
+    <div>
+        <div>First name: {{ donation.donor.first_name }}</div>
+        <div>Last name: {{ donation.donor.last_name }}</div>
+        <div>Amount: {{ donation.amount }}</div>
+        <div>Department: {{ donation.department.name }}</div>
+        <div>Drive: {{ donation.drive.name }}</div>
+        <div>Date: {{ donation.date }}</div>
+        <hr>
+    </div>
+{% endfor %}
+
+</div>
+
+{% endblock content %}

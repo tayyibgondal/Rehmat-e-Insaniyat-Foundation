@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div>
+    <form method="GET" action="{% url 'subscribers' %}">
+        <input type="text" name="q" placeholder="Search Subscribers...">
+    </form>
+
+    <div>
+        <a href="{% url 'subscribers' %}">All</a>
+    </div>
+</div>
+
+<hr>
+
+<div>
+    <div>
+        <h3>Subscriber Count: {{ subscriber_count }}</h3>
+    </div>
+    {% for subscriber in subscribers %}
+    <div>
+        <div>First name: {{ subscriber.first_name }}</div>
+        <div>Last name: {{ subscriber.last_name }}</div>
+        <div>Email: {{ subscriber.email }}</div>
+        <div>Phone No: {{ subscriber.phone_no }}</div>
+        <div>Subscription date: {{ subscriber.date }}</div>
+        <a href="{% url 'delete-subscriber' subscriber.id %}">Remove Subscription</a>
+        <hr>
+    </div>
+{% endfor %}
+
+</div>
+
+{% endblock content %}

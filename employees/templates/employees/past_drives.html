@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div>
+    <form method="GET" action="{% url 'past-drives' %}">
+        <input type="text" name="q" placeholder="Search Past...">
+    </form>
+
+    <div>
+        <a href="{% url 'past-drives' %}">All</a>
+    </div>
+</div>
+
+<hr>
+
+<div>
+    <div>
+        <h3>Past Drive Count: {{ past_drive_count }}</h3>
+    </div>
+    {% for drive in past_drives %}
+    <div>
+        <div>Name: {{ drive.name }}</div>
+        <div>Description: {{ drive.description }}</div>
+        <div>Start Date: {{ drive.start_date }}</div>
+        <div>End Date: {{ drive.end_date }}</div>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'update-past-drive' drive.id %}">Edit</a>
+        {% endif %}
+        <hr>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock content %}

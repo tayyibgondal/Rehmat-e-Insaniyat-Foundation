@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div>
+    <form method="GET" action="{% url 'blood-donations' %}">
+        <input type="text" name="q" placeholder="Search Blood Donors...">
+    </form>
+
+    <div>
+        <a href="{% url 'blood-donations' %}">All</a>
+    </div>
+</div>
+
+<hr>
+
+<div>
+    <div>
+        <h3>Blood Donations Count: {{ blood_donation_count }}</h3>
+    </div>
+    {% for bdonation in blood_donations %}
+    <div>
+        <div>First name: {{ bdonation.donor.first_name }}</div>
+        <div>Last name: {{ bdonation.donor.last_name }}</div>
+        <div>Email: {{ bdonation.donor.email }}</div>
+        <div>Phone No: {{ bdonation.donor.phone_no }}</div>
+        <div>Date: {{ bdonation.date }}</div>
+        <hr>
+    </div>
+{% endfor %}
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div>
+    <div>
+        <h3>Department: {{ department }}</h3>
+        <h3>No of benificiaries: {{benificiary_count}}</h3>
+    </div>
+    {% for benificiary in benificiaries %}
+    <div>
+        <div>First name: {{ benificiary.first_name }}</div>
+        <div>Last name: {{ benificiary.last_name }}</div>
+        <div>Age: {{ benificiary.age }}</div>
+        <div>Gender: {{ benificiary.gender }}</div>
+        <div>Gender: {{ benificiary.department.name }}</div>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'update-benificiary' benificiary.id %}">Edit</a>
+        <a href="{% url 'remove-benificiary' benificiary.id %}">Delete</a>
+        {% endif %}
+        <hr>
+    </div>
+{% endfor %}
+
+</div>
+
+{% endblock content %}

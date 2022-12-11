@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<form method="POST", action="{% url 'deliver-blood-item' blood_id %}">
+    {% csrf_token %}
+    <h2>Enter the number of {{ blood_group }} blood samples you want to deliver:</h2>
+    <input type="text" name="count"/>
+    <input type="submit" value="Deliver"/>
+</form>
+{% endblock content %}

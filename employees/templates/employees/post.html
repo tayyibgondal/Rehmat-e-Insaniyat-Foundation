@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<h1> {{ post.name }} </h1>
+<p> {{ post.description }} </p>
+<h3> {{ post.author.username }} </h3>
+<h4> Created: {{ post.created }} </h4>
+<h4> Last Updated: {{ post.updated }} </h4>
+
+
+{% endblock content %}

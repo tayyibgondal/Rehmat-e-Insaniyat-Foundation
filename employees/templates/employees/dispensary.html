@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div>
+    <form method="GET" action="{% url 'dispensary' %}">
+        <input type="text" name="q" placeholder="Search Dispensary Item...">
+    </form>
+
+    <div>
+        <a href="{% url 'dispensary' %}">All</a>
+    </div>
+</div>
+
+<hr>
+
+<div>
+    <h3>
+        <a href="{% url 'add-to-dispensary'%}">Add New Item</a>
+    </h3>
+    
+    {% for item in items %}
+    <div>
+        <div>Name: {{ item.medicine }}</div>
+        <div>Category: {{ item.category }}</div>
+        <div>Count: {{ item.count }}</div>
+        <div>Expiry Date: {{ item.expiry }} </div>
+        <a href="{% url 'update-dispensary-item' item.id %}">Edit</a>
+        <a href="{% url 'deliver-dispensary-item' item.id %}">Deliver</a>
+        <hr>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock content %}

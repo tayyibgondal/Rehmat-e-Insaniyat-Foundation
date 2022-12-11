@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div>
+    <div>
+        <h3>Volunteer Count: {{ volunteer_count }}</h3>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'available-volunteers' %}">View Available Volunteers</a>
+        {% endif %}
+    </div>
+
+    <hr>
+    {% for volunteer in volunteers %}
+    <div>
+        <div>First name: {{ volunteer.first_name }}</div>
+        <div>Last name: {{ volunteer.last_name }}</div>
+        <div>Email: {{ volunteer.email }}</div>
+        <div>Phone No: {{ volunteer.phone_no }}</div>
+        <div>Joining date: {{ volunteer.date }}</div>
+        {% if volunteer.available %}
+        <h3>Volunteer available!</h3>
+        {% else %}
+        <h3>Volunteer unavailable!</h3>
+        {% endif %}
+
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'make-vol-available' volunteer.id%}">Make available</a>
+        <a href="{% url 'make-vol-unavailable' volunteer.id%}">Make Unavailable</a>
+        <a href="{% url 'remove-volunteer' volunteer.id %}">Remove</a>
+        {% endif %}
+        <hr>
+    </div>
+{% endfor %}
+
+</div>
+
+{% endblock content %}

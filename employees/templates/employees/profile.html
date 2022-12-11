@@ -1,0 +1,15 @@
+{% extends 'main.html' %} 
+{% block content %}
+
+
+<div>
+    <div>First Name: {{ employee.first_name }}</div>
+    <div>Last Name: {{ employee.last_name }}</div>
+    <div>Email: {{ employee.email }}</div>
+    <div>Role: {{ employee.role }}</div>
+    <div>Description: {{ employee.description }}</div>
+    <div>Member since: {{ employee.date_joined }}</div>
+    <hr />
+</div>
+
+{% endblock content %}

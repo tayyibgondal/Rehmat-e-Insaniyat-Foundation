@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div>
+    <form method="GET" action="{% url 'pitches' %}">
+        <input type="text" name="q" placeholder="Search Pitches...">
+    </form>
+
+    <div>
+        <a href="{% url 'pitches' %}">All</a>
+    </div>
+</div>
+
+<hr>
+
+<div>
+{% for pitch in pitches %}
+    <div>
+        <div>Name: {{ pitch.name }}</div>
+        <div>Email: {{ pitch.email }}</div>
+        <div>Phone No: {{ pitch.phone_no }}</div>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'remove-pitch' pitch.id %}">Remove</a>
+        {% endif %}
+        <hr>
+    </div>
+{% endfor %}
+
+</div>
+
+{% endblock content %}

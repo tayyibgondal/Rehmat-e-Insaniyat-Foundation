@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div>
+    <form method="GET" action="{% url 'blood-bank' %}">
+        <input type="text" name="q" placeholder="Search in Blood Bank...">
+    </form>
+
+    <div>
+        <a href="{% url 'blood-bank' %}">All</a>
+    </div>
+</div>
+
+<hr>
+
+<div>
+    <h3>
+        <a href="{% url 'add-to-blood-bank'%}">Add New Item</a>
+    </h3>
+    
+    {% for item in items %}
+    <div>
+        <div>Blood Group: {{ item.bloodType }}</div>
+        <div>Count: {{ item.count }}</div>
+        <a href="{% url 'deliver-blood-item' item.id %}">Deliver</a>
+        <hr>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock content %}

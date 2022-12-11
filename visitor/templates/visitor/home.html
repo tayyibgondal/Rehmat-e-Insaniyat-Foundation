@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h2>Welcome to Rehmat-e-Insaniyat Foundation's Homepage</h2>
+<h3>
+    <a href="{% url 'vis-blogs' %}">Blogs</a>
+    <a href="{% url 'vis-departments' %}">Departments</a>
+    <a href="{% url 'vis-past-drives' %}">Past Drives</a>
+    <a href="{% url 'vis-drives' %}">Active Drives</a>
+    <a href="{% url 'about' %}">About</a>
+
+    <a href="{% url 'donate' %}">Donate</a>
+    <a href="{% url 'donate-blood' %}">Donate Blood</a>
+
+    <a href="{% url 'subscribe' %}">Subscribe</a>
+
+    <a href="{% url 'faqs' %}">FAQ's</a>
+    
+    <a href="{% url 'contact-us' %}">Contact</a>
+    <a href="{% url 'team' %}">Our Team</a>
+    <a href="{% url 'become-volunteer' %}">Become a Volunteer</a>
+</h3>
+{% endblock content %}
+
+
+
+
+
