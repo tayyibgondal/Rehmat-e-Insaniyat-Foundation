@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from django.forms import ModelForm
+from django.forms import ModelForm, widgets
 from .models import (Post, Department, Benificiary, Drive, 
                      PastDrive, Ambulance, Inventory, BloodBank,
                      Dispensary, FAQ, Pitch, Subscriber, Donation,
@@ -25,6 +25,7 @@ class PostForm(ModelForm):
     class Meta:
         model = Post
         fields = '__all__'
+        exclude = ['author']
 
 class DepartmentForm(ModelForm):
 
@@ -133,6 +134,7 @@ class DonationForm(ModelForm):
         model = Donation
         fields = ['first_name', 'last_name', 'email', 'phone_no', 'amount', 'department', 'drive']
         exclude = ['donor']
+        widgets = {'first_name':forms.TextInput(attrs={'class':'usr_rect'})}
 
 class BloodDonationForm(forms.Form):
     first_name = forms.CharField(max_length=30)

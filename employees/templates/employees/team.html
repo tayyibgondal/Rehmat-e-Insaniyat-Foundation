@@ -1,33 +1,39 @@
 {% extends 'main.html' %} 
 {% block content %}
 
-<div>
-  <form method="GET" action="{% url 'team' %}">
-    <input type="text" name="q" placeholder="Search from our Team..." />
-  </form>
-
-  <div>
-    <a href="{% url 'team' %}">All</a>
-  </div>
+<div class="pg_head_container">
+  <element class="pg_head">The Team</element>
 </div>
 
-<hr />
-
-<div>
-  <div>
-    <h3>
-      <p>Team Member Count: {{ team_count }}</p>
-    </h3>
-  </div>
-  {% for employee in team %}
-  <div>
-    <div>First Name: {{ employee.first_name }}</div>
-    <div>Last Name: {{ employee.last_name }}</div>
-    <div>Role: {{ employee.role }}</div>
-    <a href="{% url 'profile' employee.id %}">View</a>
-    <hr />
-  </div>
-  {% endfor %}
-</div>
+<table id="pg_divider" style="margin: 5%; width:90%">
+  <tr>
+      <td width=30% style="vertical-align: top; padding-right: 5%;">
+          <element class="subhead">Search</element>
+          <element class="pg_txt">{{ team_count }} team members.</element>
+          <form method="GET" action="{% url 'team' %}">
+              <input class="usr_rect" type="search" name="q" placeholder="Search Team...">
+          </form>
+          
+          <element class="subhead">Useful for you</element>
+          <a href="{% url 'team' %}"><button class="pst_filter">See All</button></a>
+      </td>
+      <td width="70%">
+          {% for employee in team %}
+          <table class="pst_container" style="width: 80%; margin-left: 5%;">
+              <tr width=100%>
+                  <td width=85%>
+                      <div class="pst_title">{{ employee.first_name }} {{ employee.last_name }}</div>
+                      <element class="pst_txt" style="padding-bottom: 0%;">{{ employee.role }}</element>
+                  </td>
+                  <td>
+                      <a href="{% url 'profile' employee.id %}"><button class="blue_button">Explore</button></a>
+                  </td>
+              </tr>
+              
+          </table>
+          {% endfor %}
+      </td>
+  </tr>
+</table>
 
 {% endblock content %}

@@ -1,0 +1,66 @@
+.pst_container{
+    padding: 3%;
+    margin-top: 5%;
+    width: 100%;
+    display: block;
+    background-color: rgb(180, 180, 180, 0.5);
+    box-shadow: 0px 5px 10px 0px rgb(0, 0, 0, 1);
+    border-radius: 25px;
+    margin-bottom: 5%;
+}
+
+.pst_title{
+    padding-left: 5%;
+    position: relative;
+    display: block;
+    font-family: 'Inter Black';
+    font-size: 36px;
+    width: 70%;
+}
+
+.pst_txt{
+    width: 90%;
+    padding-left: 5%;
+    padding-bottom: 3%;
+    margin-top: 1%;
+    position: relative;
+    display: block;
+    font-family: 'Inter';
+    font-size: 20px;
+}
+
+.pst_prgrs{
+    padding-left: 5%;
+    color: #058DF3;
+    position: relative;
+    display: block;
+    font-family: 'Inter Black';
+    font-size: 36px;
+    width: 30%;
+}
+
+.pst_funds{
+    padding-left: 5%;
+    color: #058cf38f;
+    position: relative;
+    display: block;
+    font-family: 'Inter Black';
+    font-size: 36px;
+    width: 100%;
+}
+
+.pst_filter {
+    font-size: 15px;
+    font-family: 'Inter';
+    padding: 1%;
+    padding-left: 3%;
+    padding-right: 3%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border: 0px;
+    border-radius: 15px;
+    background-color: #D9D9D9;
+    display: inline-block;
+    color: rgba(0, 0, 0, 1);
+    width: fit-content;
+  }

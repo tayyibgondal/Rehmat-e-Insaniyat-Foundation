@@ -1,31 +1,40 @@
 {% extends 'main.html' %}
 {% block content %}
 
-<div>
-    <form method="GET" action="{% url 'pitches' %}">
-        <input type="text" name="q" placeholder="Search Pitches...">
-    </form>
-
-    <div>
-        <a href="{% url 'pitches' %}">All</a>
-    </div>
+<div class="pg_head_container">
+    <element class="pg_head">Pitches</element>
 </div>
 
-<hr>
-
-<div>
-{% for pitch in pitches %}
-    <div>
-        <div>Name: {{ pitch.name }}</div>
-        <div>Email: {{ pitch.email }}</div>
-        <div>Phone No: {{ pitch.phone_no }}</div>
-        {% if request.user.is_authenticated %}
-        <a href="{% url 'remove-pitch' pitch.id %}">Remove</a>
-        {% endif %}
-        <hr>
-    </div>
-{% endfor %}
-
-</div>
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <form method="GET" action="{% url 'pitches' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search Pitches...">
+            </form>
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'pitches' %}"><button class="pst_filter">See All</button></a>
+        </td>
+        <td width="70%">
+            {% for pitch in pitches %}
+            <table class="pst_container" style="width: 80%; margin-left: 5%;">
+                <tr>
+                    <td width=84% rowspan="2">
+                        <div class="pst_title">{{ pitch.name }}</div>
+                        <div class="pst_txt">{{ pitch.email }}, {{ pitch.phone_no }}</div>
+                    </td>
+                    
+                    {% if request.user.is_authenticated %}
+                    <td>
+                        <a href="{% url 'remove-pitch' pitch.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                    </td>
+                    {% endif %}
+                </tr>
+                
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
 
 {% endblock content %}

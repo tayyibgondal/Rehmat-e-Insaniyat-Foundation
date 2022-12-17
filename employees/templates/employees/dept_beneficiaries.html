@@ -1,26 +1,43 @@
 {% extends 'main.html' %}
 {% block content %}
 
-<div>
-    <div>
-        <h3>Department: {{ department }}</h3>
-        <h3>No of benificiaries: {{benificiary_count}}</h3>
-    </div>
-    {% for benificiary in benificiaries %}
-    <div>
-        <div>First name: {{ benificiary.first_name }}</div>
-        <div>Last name: {{ benificiary.last_name }}</div>
-        <div>Age: {{ benificiary.age }}</div>
-        <div>Gender: {{ benificiary.gender }}</div>
-        <div>Gender: {{ benificiary.department.name }}</div>
-        {% if request.user.is_authenticated %}
-        <a href="{% url 'update-benificiary' benificiary.id %}">Edit</a>
-        <a href="{% url 'remove-benificiary' benificiary.id %}">Delete</a>
-        {% endif %}
-        <hr>
-    </div>
-{% endfor %}
-
+<div class="pg_head_container">
+    <element class="pg_head">{{ department }}</element>
 </div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width="70%">
+            <element class="subhead">{{benificiary_count}} results available.</element>
+            {% for benificiary in benificiaries %}
+            <table class="pst_container" style="width: 90%; margin-left: 5%;">
+                <tr>
+                    <td width=80% rowspan="2">
+                        <div class="pst_title">{{ benificiary.first_name }} {{ benificiary.last_name }}</div>
+                        <div class="pst_txt">{{ benificiary.age }}</div>
+                    </td>
+                    <td colspan="3">
+                        <element class="pst_funds">{{ benificiary.department.name }}</element>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    {% if request.user.is_authenticated %}
+                    <td>
+                        <a href="{% url 'update-benificiary' benificiary.id %}"><button class="blue_button">Edit</button></a>
+                    </td>
+                    <td>
+                        <a href="{% url 'remove-benificiary' benificiary.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                    </td>
+                    {% endif %}
+                </tr>
+                
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
 
 {% endblock content %}

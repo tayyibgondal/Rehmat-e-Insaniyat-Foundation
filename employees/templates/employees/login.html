@@ -1,16 +1,29 @@
 {% extends 'main.html' %}
+
 {% block content %} 
 
-<div>
+<center>
     <form method="POST" action="">
-        {% csrf_token %}  
-        <input type="text" name="email" placeholder="Enter Email"/>
-        <input type="password" name="password" placeholder="Password"/>
-        <input type="submit" value="Submit"/>
-
-        <p>Don't have an account?</p>
-        <a href="{% url 'register' %}">Sign up</a>
+        {% csrf_token %}
+        <div class="pg_head_container_center" style="margin-top: 12%;">
+            <element class="pg_head">Login</element><br>
+            {% if msg != 'None' %}
+            <div class="error" id="login_error_msg">{{ msg }}</div>
+            {% endif %}
+            <input type="text" id="email" name="email" class="usr_rect" placeholder="Enter Email"/>
+            <input type="password" id="password" name="password" class="usr_rect" placeholder="Password"/>
+        </div>
+        
+        <element class="usr_under_rect" id="lgnbtn">
+            Don't have an account? 
+            <a href="{% url 'register' %}">
+                <element class="pg_txt_hyper">
+                    Sign up
+                </element>
+            </a>.
+        </element>
+        <input type="submit" id="loginbtn" class="lgn_sgn_button" value="Submit"/>
     </form>
-</div>
+</center>
 
 {% endblock content %}

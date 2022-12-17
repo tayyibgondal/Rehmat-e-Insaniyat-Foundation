@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'mathfilters',
     'visitor.apps.VisitorConfig',
     'employees.apps.EmployeesConfig',
     'django.contrib.admin',

@@ -1,34 +1,45 @@
 {% extends 'main.html' %}
 {% block content %}
-
-<div>
-    <form method="GET" action="{% url 'ambulances' %}">
-        <input type="text" name="q" placeholder="Search Ambulance...">
-    </form>
-
-    <div>
-        <a href="{% url 'ambulances' %}">All</a>
+    <div class="pg_head_container">
+        <element class="pg_head">Ambulances</element>
     </div>
-</div>
 
-<hr>
+    <table id="pg_divider" style="margin: 5%; width:90%">
+        <tr>
+            <td width=30% style="vertical-align: top; padding-right: 5%;">
+                <element class="subhead">Search</element>
+                <element class="pg_txt">{{ ambulances_count }} results.</element>
+                <form method="GET" action="{% url 'ambulances' %}">
+                    <input class="usr_rect" type="search" name="q" placeholder="Search Ambulances...">
+                </form>
+                <element class="subhead">Useful for you</element>
+                <a href="{% url 'ambulances' %}"><button class="pst_filter">See All</button></a>
+            </td>
+            <td width="70%">
+                <a href="{% url 'add-ambulance'%}"><button class="blue_button">+ Add Ambulance</button></a>
+                
+                {% for ambulance in ambulances %}
+                <table class="pst_container" style="width: 80%; margin-left: 5%;">
+                    <tr>
+                        <td width=60%>
+                            <div class="pst_title">{{ ambulance.plate_no }}</div>
+                            <div class="pst_txt">{{ ambulance.driver.username}}</div>
+                        </td>
+                        <td width=30%>
+                            <a href="{% url 'update-ambulance' ambulance.id %}"><button class="blue_button">Edit Driver</button></a>
+                        </td>
+                        <td>
+                            <a href="{% url 'remove-ambulance' ambulance.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                        </td>
+                    </tr>
+                    
+                </table>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
 
-<div>
-    <h3>
-        <p>Ambulance Count: {{ ambulances_count }}</p>
-        <a href="{% url 'add-ambulance'%}">Add New Ambulance</a>
-    </h3>
     
-    {% for ambulance in ambulances %}
-    <div>
-        <div>Plate Number: {{ ambulance.plate_no }}</div>
-        <div>Driver Name: {{ ambulance.driver.username}}</div>
-        <a href="{% url 'update-ambulance' ambulance.id %}">Change Driver</a>
-        <a href="{% url 'remove-ambulance' ambulance.id %}">Remove Ambulance</a>
-        <hr>
-    </div>
-    {% endfor %}
 
-</div>
 
 {% endblock content %}

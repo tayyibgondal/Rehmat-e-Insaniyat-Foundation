@@ -1,13 +1,34 @@
 {% extends 'main.html' %}
 
 {% block content %}
+<center>
+<div class="pg_head_container">
+    <element class="pg_head">Please fill out this form.</element>
+    
+    <element class="pg_txt">
+        Make a change by donating to those in need of it.
+    </element>
+    
+</div>
 
-<div>
+
+
+<div style="margin-top: -10%;">
     <form method="POST" action="">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit"/>
+        <div class="pg_head_container_center" style="margin-top: 12%;">
+            <div class="form__group form__group">
+                {% for field in form %}
+                <div class="form__group form__group">
+                    <label>{{field.label}}</label>
+                    {{field}}
+                </div>
+                {% endfor %}
+            </div>
+            <input type="submit" class="blue_button" value="Submit"/>
+        </div>
     </form>
 </div>
+</center>
 
 {% endblock content %}

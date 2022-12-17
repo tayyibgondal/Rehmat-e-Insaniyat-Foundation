@@ -23,33 +23,35 @@ def LoginView(request):
     if request.user.is_authenticated:
         return redirect('emp-home')
 
+    msg = 'None'
     # getting data from user
     if request.method == 'POST':
         email = request.POST.get('email').lower()
         password = request.POST.get('password')
-    
+
         # checking if user exists or not
         try:
             Employee.objects.get(email=email)
             # Authenticating the user and proceeding accordingly
             # (authenticate function returns NONE if user is not authenticated)
             user = authenticate(request, email=email, password=password)
-
             if user is not None:
                 login(request, user)
                 return redirect('emp-home')
             else:
-                messages.error(request, 'Incorrect Email or Password!')
+                msg = 'Incorrect Email or Password!'
         except:
-            messages.error(request, 'User does not exist!')
-
+            msg = 'User does not exist!'
     context = {
+        "msg":msg,
+        "msgcount":len(msg)
     }
     return render(request, 'employees/login.html', context)
 
 @csrf_exempt
 def register(request):
     form = CustomUserCreationForm()
+    
 
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -105,7 +107,9 @@ def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if(form.is_valid()):
-            form.save()
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
             return redirect('all-posts')
     context = {
         'form': form,
@@ -794,3 +798,4 @@ def make_vol_unavailable(request, pk):
         volunteer.save()
         messages.info(request, 'Volunteer Freed!')
         return redirect('volunteers')
+        

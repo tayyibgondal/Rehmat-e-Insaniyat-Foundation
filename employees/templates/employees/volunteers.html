@@ -1,37 +1,62 @@
 {% extends 'main.html' %}
 {% block content %}
 
-<div>
-    <div>
-        <h3>Volunteer Count: {{ volunteer_count }}</h3>
-        {% if request.user.is_authenticated %}
-        <a href="{% url 'available-volunteers' %}">View Available Volunteers</a>
-        {% endif %}
-    </div>
-
-    <hr>
-    {% for volunteer in volunteers %}
-    <div>
-        <div>First name: {{ volunteer.first_name }}</div>
-        <div>Last name: {{ volunteer.last_name }}</div>
-        <div>Email: {{ volunteer.email }}</div>
-        <div>Phone No: {{ volunteer.phone_no }}</div>
-        <div>Joining date: {{ volunteer.date }}</div>
-        {% if volunteer.available %}
-        <h3>Volunteer available!</h3>
-        {% else %}
-        <h3>Volunteer unavailable!</h3>
-        {% endif %}
-
-        {% if request.user.is_authenticated %}
-        <a href="{% url 'make-vol-available' volunteer.id%}">Make available</a>
-        <a href="{% url 'make-vol-unavailable' volunteer.id%}">Make Unavailable</a>
-        <a href="{% url 'remove-volunteer' volunteer.id %}">Remove</a>
-        {% endif %}
-        <hr>
-    </div>
-{% endfor %}
-
+<div class="pg_head_container">
+    <element class="pg_head">Volunteers</element>
 </div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <element class="pg_txt">{{ volunteer_count }} volunteers available.</element>
+            <form method="GET" action="{% url 'volunteers' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search Volunteers...">
+            </form>
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'volunteers' %}"><button class="pst_filter">See All</button></a>
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'available-volunteers' %}"><button class="pst_filter">Available</button></a>
+            {% endif %}
+        </td>
+        <td width="70%">
+            {% for volunteer in volunteers %}
+            <table class="pst_container" style="width: 80%; margin-left: 5%;">
+                <tr>
+                    <td width=60% rowspan="2">
+                        <div class="pst_title">{{ volunteer.first_name }} {{ volunteer.last_name }}</div>
+                        <div class="pst_txt">{{ volunteer.email }}, {{ volunteer.phone_no }}</div>
+                        <div class="pst_txt">Joined on {{ volunteer.date }}</div>
+                    </td>
+                    <td colspan="3">
+                        {% if volunteer.available %}
+                        <element class="pst_funds">Available</element></h3>
+                        {% else %}
+                        <element class="pst_funds">Unavailable</element></h3>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    {% if request.user.is_authenticated %}
+                    <td>
+                        <a href="{% url 'make-vol-available' volunteer.id%}"><button class="blue_button">Make Available</button></a>
+                    </td>
+                    <td>
+                        <a href="{% url 'make-vol-unavailable' volunteer.id%}"><button class="blue_button">Make Unavailable</button></a>
+                    </td>
+                    <td>
+                        <a href="{% url 'remove-volunteer' volunteer.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                    </td>
+                    {% endif %}
+                </tr>
+                
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
 
 {% endblock content %}

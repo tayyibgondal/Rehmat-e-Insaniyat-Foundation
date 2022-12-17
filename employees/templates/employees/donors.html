@@ -1,32 +1,37 @@
 {% extends 'main.html' %}
 {% block content %}
 
-<div>
-    <form method="GET" action="{% url 'donors' %}">
-        <input type="text" name="q" placeholder="Search Donors...">
-    </form>
-
-    <div>
-        <a href="{% url 'donors' %}">All</a>
-    </div>
+<div class="pg_head_container">
+    <element class="pg_head">Donors</element>
 </div>
 
-<hr>
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <element class="pg_txt">{{ donor_count }} results.</element>
+            <form method="GET" action="{% url 'donors' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search Donors...">
+            </form>
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'donors' %}"><button class="pst_filter">See All</button></a>
+        </td>
+        <td width="70%">
+            {% for donor in donors %}
+            <table class="pst_container" style="width: 80%; margin-left: 5%;">
+                <tr>
+                    <td width=100%>
+                        <div class="pst_title">{{ donor.first_name }} {{ donor.last_name }}</div>
+                        <element class="pst_txt" style="padding-bottom: 0%;">{{ donor.email }}, {{ donor.phone_no }}</element>
+                    </td>
+                    <td>
 
-<div>
-    <div>
-        <h3>Donor Count: {{ donor_count }}</h3>
-    </div>
-    {% for donor in donors %}
-    <div>
-        <div>First name: {{ donor.first_name }}</div>
-        <div>Last name: {{ donor.last_name }}</div>
-        <div>Email: {{ donor.email }}</div>
-        <div>Phone No: {{ donor.phone_no }}</div>
-        <hr>
-    </div>
-{% endfor %}
-
-</div>
+                    </td>
+                </tr>
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
 
 {% endblock content %}

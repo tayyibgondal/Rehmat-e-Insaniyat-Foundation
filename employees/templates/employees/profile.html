@@ -1,15 +1,13 @@
 {% extends 'main.html' %} 
 {% block content %}
 
-
-<div>
-    <div>First Name: {{ employee.first_name }}</div>
-    <div>Last Name: {{ employee.last_name }}</div>
-    <div>Email: {{ employee.email }}</div>
-    <div>Role: {{ employee.role }}</div>
-    <div>Description: {{ employee.description }}</div>
-    <div>Member since: {{ employee.date_joined }}</div>
-    <hr />
+<a href="{% url 'team' %}"><button class="blue_button">Go back</button></a>
+<div class="pg_head_container">
+    <element class="pg_head">{{ employee.first_name }} {{ employee.last_name }}</element>
+    <element class="pg_txt">{{ employee.role }}</element>
 </div>
+<element class="pst_txt" style="padding-bottom: 0%; width: 50%;">{{ employee.description }}</element>
+<element class="pst_txt" style="padding-bottom: 0%;">{{ employee.email }}</element>
+<element class="pst_txt" style="display: block; font-size: 18px; margin-top: 0%;">Joined {{ employee.date_joined }}</element>
 
 {% endblock content %}

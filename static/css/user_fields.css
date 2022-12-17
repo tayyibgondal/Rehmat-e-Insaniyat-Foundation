@@ -1,0 +1,157 @@
+.input {
+  width: 100%;
+  font-size: 15px;
+  font-family: 'Inter';
+  padding: 3%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  border: 0px;
+  border-radius: 15px;
+  background-color: #D9D9D9;
+  color: rgba(0, 0, 0, 0.50);
+  height: fit-content;
+}
+
+.usr_rect {
+  width: 100%;
+  font-size: 15px;
+  font-family: 'Inter';
+  padding: 3%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  border: 0px;
+  border-radius: 15px;
+  background-color: #D9D9D9;
+  color: rgba(0, 0, 0, 0.50);
+  height: fit-content;
+}
+.form__group {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.form__group label {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.form__group input,
+.form__group textarea,
+.form__group select {
+  background: transparent;
+  border: 1px solid var(--color-dark-light);
+  padding: 1rem;
+  border-radius: 3px;
+  width: 100%;
+  color: var(--color-light);
+  font-weight: 500;
+  outline: none;
+}
+
+.form__group input:focus,
+.form__group textarea:focus {
+  border-color: var(--color-main);
+}
+
+.form__group textarea {
+  background: transparent;
+  height: 10rem;
+  resize: none;
+}
+
+.form__group select {
+  color: var(--color-gray);
+  font-weight: 400;
+}
+
+.form__group select option {
+  background-color: var(--color-dark-light);
+  color: var(--color-light);
+  padding: 0 10rem;
+}
+
+.usr_under_rect {
+  margin-top: 1%;
+  margin-bottom: 5%;
+  font-size: 15px;
+  color: black;
+  display: block;
+  font-family: 'Inter ExtraLight';
+}
+
+.error {
+  width: 100%;
+  margin-bottom: 1%;
+  padding: 2%;
+  padding-left:3;
+  padding-right: 3%;
+  font-size: 14px;
+  border-radius: 15px;
+  font-family: 'Inter Light';
+  border: 0px;
+  border-style: solid;
+  border-color: red;
+  background: rgba(255, 0, 0, 0.25);
+  color: red;
+  text-align: left;
+  transition-duration: 0.1s;
+    
+  /* Animation */
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.success {
+  width: 100%;
+  margin-bottom: 1%;
+  padding: 2%;
+  padding-left:3;
+  padding-right: 3%;
+  font-size: 14px;
+  border-radius: 15px;
+  font-family: 'Inter Light';
+  border: 0px;
+  border-style: solid;
+  border-color: rgb(21, 255, 0);
+  background: rgba(43, 255, 0, 0.25);
+  color: rgb(42, 182, 0);
+  text-align: left;
+}
+
+.caution {
+  width: 100%;
+  margin-bottom: 1%;
+  padding: 2%;
+  padding-left:3;
+  padding-right: 3%;
+  font-size: 14px;
+  border-radius: 15px;
+  font-family: 'Inter Light';
+  border: 0px;
+  border-style: solid;
+  border-color: rgb(255, 166, 0);
+  background: rgba(255, 208, 0, 0.25);
+  color: rgb(182, 164, 0);
+  text-align: left;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

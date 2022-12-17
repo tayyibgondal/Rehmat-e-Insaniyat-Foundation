@@ -1,0 +1,42 @@
+{% load static %}
+{% if user.is_authenticated %}
+<element class="copyrt">Copyright 2022 Rehmat-e-Insaniyat Inc.</element>
+
+{% else %}
+<div class="main_ft">
+    <table class="foottable" width = 95%>
+        <tr>
+            <td width=25%>    <element class="foothead">Know us</element>             </td>
+            <td width=25%>    <element class="foothead">Frequently Asked</element>    </td>
+            <td width=25%>    <element class="foothead">Our Stories</element>         </td>
+            <td width=25%>    <element class="foothead">Useful Links</element>        </td>
+        </tr>
+        
+        <tr>
+            <td width=25%> <element class="footlink">Facebook</element> </td>
+            <td width=25%> <element class="footlink">What is your NGO About?</element> </td>
+            <td width=25%> <element class="footlink">The 20XX Earthquake Drive</element> </td>
+            <td width=25%> <element class="footlink">Home</element> </td>
+        </tr>
+        <tr>
+            <td> <element class="footlink">Twitter</element> </td>
+            <td> <element class="footlink">How can I become an volunteer?</element> </td>
+            <td> <element class="footlink">The 20XX Orphanage Drive</element> </td>
+            <td> <element class="footlink">Contact Us</element> </td>
+        </tr>
+        <tr>
+            <td> <element class="footlink">Instagram</element> </td>
+            <td> <element class="footlink">How do I work full-time?</element> </td>
+            <td> <element class="footlink">The XYZ Award</element> </td>
+            <td> <element class="footlink">Donate</element> </td>
+        </tr>
+        <tr>
+            <td> <element class="footlink">Discord</element> </td>
+            <td> <element class="footlink">Are you trustworthy?</element> </td>
+            <td> <element class="footlink"></element> </td>
+            <td> <element class="footlink">News & Blogs</element> </td>
+        </tr>
+    </table>
+</div>
+<element class="copyrt">Copyright 2022 Rehmat-e-Insaniyat Inc.</element>
+{% endif %}

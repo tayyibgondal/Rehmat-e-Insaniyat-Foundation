@@ -1,32 +1,39 @@
 {% extends 'main.html' %}
 {% block content %}
 
-<div>
-    <form method="GET" action="{% url 'blood-bank' %}">
-        <input type="text" name="q" placeholder="Search in Blood Bank...">
-    </form>
-
-    <div>
-        <a href="{% url 'blood-bank' %}">All</a>
-    </div>
+<div class="pg_head_container">
+    <element class="pg_head">Blood Bank</element>
 </div>
 
-<hr>
-
-<div>
-    <h3>
-        <a href="{% url 'add-to-blood-bank'%}">Add New Item</a>
-    </h3>
-    
-    {% for item in items %}
-    <div>
-        <div>Blood Group: {{ item.bloodType }}</div>
-        <div>Count: {{ item.count }}</div>
-        <a href="{% url 'deliver-blood-item' item.id %}">Deliver</a>
-        <hr>
-    </div>
-    {% endfor %}
-
-</div>
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <form method="GET" action="{% url 'blood-bank' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search Blood Bank...">
+            </form>
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'blood-bank' %}"><button class="pst_filter">See All</button></a>
+        </td>
+        <td width="70%">
+            <a href="{% url 'add-to-blood-bank'%}"><button class="blue_button">+ Add Item</button></a>
+            
+            {% for item in items %}
+            <table class="pst_container" style="width: 80%; margin-left: 5%;">
+                <tr width=100%>
+                    <td width=85%>
+                        <div class="pst_title">{{ item.bloodType }}</div>
+                        <div class="pst_txt">{{ item.count }} samples remaining.</div>
+                    </td>
+                    <td>
+                        <a href="{% url 'deliver-blood-item' item.id %}"><button class="blue_button">Deliver</button></a>
+                    </td>
+                </tr>
+                
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
 
 {% endblock content %}

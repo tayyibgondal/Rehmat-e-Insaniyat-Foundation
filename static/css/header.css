@@ -1,0 +1,160 @@
+/* ANIMATIONS SET */
+
+@keyframes slide-in {
+    from {
+        transform: translate(-100%, -50%);
+    }
+
+    to {
+        transform: translate(0%, -50%);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0%;
+    }
+
+    to {
+        opacity: 100%;
+    }
+}
+
+@keyframes slide-in-img {
+    from {
+        transform: translate(-100%, 0%);
+    }
+
+    to {
+        transform: translate(0%, 0%);
+    }
+}
+
+/* ....... */
+/* HEADERS */
+/* ....... */
+
+#myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: #058DF3; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 1.5%; /* Some padding */
+    border-radius: 15px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+    transition-duration: 0.5s;
+}
+  
+#myBtn:hover {
+    background-color: rgb(255, 255, 255); /* Add a dark-grey background on hover */
+}
+
+.main_hd{
+    position: relative;
+    background-color: #011E4D;
+    color: white;
+    top: 0%;
+    text-indent: 3%;
+    font-family: "Inter Black";
+    opacity: 100%;
+    font-weight: bolder;
+    font-size: 30px;
+    padding: 2%;
+    box-shadow: 0px 1px 10px 0px black;
+    /* transition-duration: 1s; */
+
+    /* animations */
+    animation-name: fade-in;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: cubic-bezier(0, 0.82, 0.165, 1);
+}
+
+.wstitle{
+    color: white;
+    border: 0px;
+    background-color: transparent;
+    top: 0%;
+    font-family: "Inter Black";
+    opacity: 100%;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+.feature{
+    font-family: "Inter";
+    width:fit-content;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.747);
+    padding-left: 1%;
+    padding-right: 1%;
+    border: 0px;
+    background: transparent;
+    vertical-align: middle;
+}
+
+.feature:hover{
+    color: white;
+}
+
+.goldbtn{
+    border-radius: 50px;
+    font-family: "Inter SemiBold";
+    width: fit-content;
+    padding: 10px;
+    border: 0px;
+    font-size: 16px;
+    color: white;
+    background: linear-gradient( #F3B005, #F38605);
+    vertical-align: middle;
+    float: right;
+    margin-right: 2%;
+    transition-duration: 0.25s;
+}
+
+.loginbtn{
+    border-radius: 50px;
+    font-family: "Inter SemiBold";
+    width: fit-content;
+    padding: 10px;
+    border: 0px;
+    font-size: 16px;
+    color: white;
+    background: linear-gradient( #058DF3,#025ba0);
+    vertical-align: middle;
+    float: right;
+    margin-right: 5%;
+    transition-duration: 0.25s;
+}
+
+.loginbtn:hover{
+    background: linear-gradient(90deg, #058DF3,#025ba0);
+    box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.goldbtn:hover{
+    background: linear-gradient(90deg, #F3B005, #F38605);
+    box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.pfp{
+    border-radius: 50px;
+    font-family: "Inter SemiBold";
+    width: fit-content;
+    padding: 25px;
+    border: 0px;
+    font-size: 16px;
+    color: white;
+    background: radial-gradient(black, gray, white);
+    vertical-align: middle;
+    float: right;
+    margin-right: 5%;
+}
+

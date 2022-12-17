@@ -4,11 +4,16 @@
 <div>
     <form method="POST" action="">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Register"/>
-
+        {% for field in form %}
+        <div>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <input type="blue_button" value="Register"/>
+        
         <p>Already have an account?</p>
-        <a href="{% url 'login' %}">Sign in</a>
+        <a href="{% url 'login' %}"><button class="pst_txt_hyper">Sign in</button></a>
+        <div class="usr_rect">{{ form.role }}</div>
     </form>
 </div>
 

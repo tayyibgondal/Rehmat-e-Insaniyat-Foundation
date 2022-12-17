@@ -2,4 +2,65 @@
 
 {% block content %}
 
+<div class="pg_head_container" style="width: 75%;">
+    <element class="pg_head">Welcome, @{{user.username}}!</element>
+    <element class="pg_txt">{{ user.first_name }} {{ user.last_name }}
+    <br> {{ user.email }}
+    <br> {{ user.role }}
+    <a href="{% url 'edit-profile' request.user.id %}"><element class="pg_txt_hyper" style="display: block;">Edit</element></a>
+    </element>
+</div>
+<element class="pst_txt" style="padding-bottom: 0%;">{{ employee.email }}</element>
+
+<div class="pg_head_container" style="width: 90%; padding-bottom: 5%;">
+    <div class="pg_head">
+        Your NGO in a Glimpse
+    </div>
+</div>
+<div style="margin-left: 5%;">    
+    <div class="subhead">
+        Donations
+    </div>
+    <div class="stats_container">
+        <div class="bigcount">
+            PKR XXXXXXXXXXXX
+        </div>
+        <element class="subhead_thinned" style="margin-left: 5%;">
+            Recent Donations 
+            <a href="{% url 'donations' %}">
+                <element class="pg_txt_hyper" style="font-size: 20px; float: right; margin-right: 3%;">
+                    See more >
+                </element>
+            </a>
+        </element>
+        <div class="error" style="padding: 1%; width: 90%; margin-left: 5%;">No data to show.</div>
+    </div>
+
+    <div class="subhead">
+        Volunteers
+    </div>
+    <div class="stats_container">
+        <div class="bigcount">
+            48,124 volunteers
+        </div>
+        <element class="subhead_thinned" style="margin-left: 5%;">
+            Recent Hirings
+        </element>
+        <div class="error" style="padding: 1%; width: 90%; margin-left: 5%;">No data to show.</div>
+    </div>
+    
+    <div class="subhead">
+        Inventory
+    </div>
+    <div class="stats_container">
+        <div class="bigcount">
+            48,246,214 items in stock.
+        </div>
+        <element class="subhead_thinned" style="margin-left: 5%;">
+            Running Outs
+        </element>
+        <div class="success" style="padding: 1%; width: 90%; margin-left: 5%;">You're running out of nothing currently.</div>
+    </div>
+</div>
+
 {% endblock content %}

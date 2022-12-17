@@ -1,25 +1,91 @@
 {% extends 'main.html' %}
+{%load static%}
 
 {% block content %}
-<h2>Welcome to Rehmat-e-Insaniyat Foundation's Homepage</h2>
-<h3>
-    <a href="{% url 'vis-blogs' %}">Blogs</a>
-    <a href="{% url 'vis-departments' %}">Departments</a>
-    <a href="{% url 'vis-past-drives' %}">Past Drives</a>
-    <a href="{% url 'vis-drives' %}">Active Drives</a>
-    <a href="{% url 'about' %}">About</a>
 
-    <a href="{% url 'donate' %}">Donate</a>
-    <a href="{% url 'donate-blood' %}">Donate Blood</a>
 
-    <a href="{% url 'subscribe' %}">Subscribe</a>
+<body bgcolor="black">
+    <element class="container">
+        <img class="img" src="{% static 'images/blood1.png' %}">
+        <div class="title_desc_container" style="margin-top: 60%;" data-aos="fade-up">
+            <element class="title">Provide a Home</element>
+            <element class="desc">Provide shelter to those who are shelterless.</element>
+            <a href="{% url 'vis-drives' %}"> <button class="blue_button">How can I help?</button></a>
+        </div>
+    </element>
 
-    <a href="{% url 'faqs' %}">FAQ's</a>
-    
-    <a href="{% url 'contact-us' %}">Contact</a>
-    <a href="{% url 'team' %}">Our Team</a>
-    <a href="{% url 'become-volunteer' %}">Become a Volunteer</a>
-</h3>
+    <div class="container" style="background-color: white; display: block; width: 100%;">
+        <table width=100%>
+            <tr>
+                <td width=50%>
+                    <img src="{% static 'images/heart1.jpg' %}" width="100%" style="overflow: hidden;">
+                </td>
+                <td width=50%>
+                    <div class="title_desc_container" style="color: black; margin-top: -5%; width: 49%;" data-aos="fade-up">
+                        <element class="title" style="color: black; width: 60%;">Save a dying.</element>
+                        <element class="desc" style="color: black; width: 60%;">People of the non-affording class die due to starvation more than anything else in Pakistan.</element>
+                        <a href="{% url 'vis-drives' %}"> <button class="blue_button">How can I help?</button></a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <element class="container">
+        <img class="img" src="{% static 'images/poor2.jpg' %}">
+        <div class="title_desc_container" style="margin-top: 60%;" data-aos="fade-up">
+            <element class="title">Save a Starving</element>
+            <element class="desc">People of the non-affording class die due to starvation more than anything else in Pakistan.</element>
+            <a href="{% url 'vis-drives' %}"> <button class="blue_button">How can I help?</button></a>
+        </div>
+    </element>
+
+    <div class="container" style="background-color: white; display: block; width: 100%;">
+        <table>
+            <tr>
+                <td width=50%>
+                    <img src="{% static 'images/collab1.jpg' %}" width="100%" style="overflow: hidden;">
+                </td>
+                <td>
+                    <div class="title_desc_container" style="color: black; margin-top: -5%; width: 49%;" data-aos="fade-up">
+                        <element class="title" style="color: black; width: 60%;">Join us.</element>
+                        <element class="desc" style="color: black; width: 60%;">Volunteer to save the country's suffering proportion from worsening their lives. Be a part of the movement!</element>
+                        <a href="{% url 'vis-drives' %}"> <button class="blue_button">Join us.</button></a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <element class="container">
+        <img class="img" src="{% static 'images/poor1.jpg' %}">
+        <div class="title_desc_container" style="top: 5%;" data-aos="fade-up">
+            <element class="title">Every blood type counts.</element>
+            <element class="desc">Your blood is life for not only you, but those also who suffer blood disease.</element>
+            <a href="{% url 'vis-drives' %}"> <button class="blue_button">How can I help?</button></a>
+        </div>
+    </element>
+
+    <div class="container" style="background-color: white; display: block; height: 650px; width: 100%;">
+        <table>
+            <tr>
+                <td width=50%>
+                    <img src="{% static 'images/info1.png' %}" width="85%" style="overflow: hidden;">
+                </td>
+                <td width=50%>
+                    <div class="title_desc_container" style="color: black; margin-top: -5%; width: 49%;" data-aos="fade-up">
+                        <element class="title" style="color: black; width: 60%;">Stay informed.</element>
+                        <element class="desc" style="color: black; width: 60%;">Join the newsletter to stay up to date with the latest news regarding any new opportunities where you can give away.</element>
+                        <a href="{% url 'subscribe' %}"> <button class="blue_button">Sign up for the newsletter</button></a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</script>
+
 {% endblock content %}
 
 

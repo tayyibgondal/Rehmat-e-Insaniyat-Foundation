@@ -1,48 +1,91 @@
 {% extends 'main.html' %}
 {% block content %}
 
-<div>
-    <form method="GET" action="{% url 'faqs' %}">
-        <input type="text" name="q" placeholder="Search FAQs...">
-    </form>
-
-    <div>
-        <a href="{% url 'faqs' %}">All</a>
-    </div>
-    <div>
-        {% if request.user.is_authenticated %}
-        {% else %}
-        <a href="{% url 'ask-question' %}">Ask a Question</a>
-        {% endif %}
-    </div>
+<div class="pg_head_container">
+    <element class="pg_head">Frequently Asked Questions</element>
 </div>
 
-<hr>
-
-<div>
-    {% for faq in faqs %}
-    <div>            
-        {% if request.user.is_authenticated %}
-            <h3><div>Question: {{ faq.question }}</div></h3>
-            {% if faq.answer == '' or faq.answer == None %}
-                <a href="{% url 'answer-question' faq.id %}">Add an Answer</a>
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <form method="GET" action="{% url 'faqs' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search FAQs...">
+            </form>
+            
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'faqs' %}"><button class="pst_filter">See All</button></a>
+        </td>
+        <td width="70%">
+            {% if request.user.is_authenticated %}
             {% else %}
-            <div>Answer: {{ faq.answer }}</div>
-                <a href="{% url 'answer-question' faq.id %}">Edit</a>
+            <a href="{% url 'ask-question' %}"><button class="blue_button">+ Ask a question</button></a>
             {% endif %}
-            <a href="{% url 'remove-faq' faq.id %}">Remove</a>
-
-        {% else %}
-            {% if faq.answer == '' or faq.answer == None %}
-            {% else %}
-            <h3><div>Question: {{ faq.question }}</div></h3>
-            <div>Answer: {{ faq.answer }}</div>
-            <hr>
-            {% endif %}
-        {% endif %}
-    </div>
-    {% endfor %}
-
-</div>
-
+                <table style="margin-left: 5%;" > 
+                    {% for faq in faqs %}
+                    {% if request.user.is_authenticated %}
+                    <tr>
+                        <td width=5%>
+                            <div class="question">
+                                Q
+                            </div>
+                        </td>
+                        <td>
+                            <div class="question">
+                                {{ faq.question }}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top;">
+                            <div class="question">
+                                A
+                            </div>
+                        </td>
+                        <td>
+                            {% if faq.answer == '' or faq.answer == None %}
+                            <div class="error" style="width: 90%;">No answer submitted.</div>
+                            <a href="{% url 'answer-question' faq.id %}"><button class="blue_button">Answer</button></a>
+                            {% else %}
+                            <div class="answer" style="margin-bottom: 0%;">{{ faq.answer }}</div>
+                            <a href="{% url 'answer-question' faq.id %}"><button class="blue_button">Edit</button></a>
+                            {% endif %}
+                            <a href="{% url 'remove-faq' faq.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                            <div style="margin-bottom: 5%;"></div>
+                        </td>
+                    </tr>    
+                    {% else %}
+                    {% if faq.answer == '' or faq.answer == None %}
+                    {% else %}
+                    <tr>
+                        <td width=5%>
+                            <div class="question">
+                                Q
+                            </div>
+                        </td>
+                        <td>
+                            <div class="question">
+                                {{ faq.question }}
+                            </div>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>    
+                    <tr>
+                        <td style="vertical-align: top;">
+                            <div class="question">
+                                A
+                            </div>
+                        </td>
+                        <td>
+                            <div class="answer">{{ faq.answer }}</div>
+                        </td>
+                    </tr>   
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            </table>
+        </td>
+    </tr>
+</table>
 {% endblock content %}

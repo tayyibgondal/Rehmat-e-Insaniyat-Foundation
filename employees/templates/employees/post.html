@@ -1,11 +1,14 @@
 {% extends 'main.html' %}
 {% block content %}
 
-<h1> {{ post.name }} </h1>
-<p> {{ post.description }} </p>
-<h3> {{ post.author.username }} </h3>
-<h4> Created: {{ post.created }} </h4>
-<h4> Last Updated: {{ post.updated }} </h4>
+<a href="{% url 'vis-blogs' %}"><button class="blue_button">Go back</button></a>
+<div class="pg_head_container">
+    <element class="pg_head">Post by {{ post.author.username }}.</element>
+    <element class="pg_txt">Last updated on {{ post.created }}.</element>
+</div>
+<element class="pst_txt" style="padding-bottom: 0%; width: 50%;">{{post.description}}</element>
+<element class="pst_txt" style="padding-bottom: 0%;">Topic: {{post.title}}</element>
+<element class="pst_txt" style="display: block; font-size: 18px; margin-top: 0%;">{{ post.created }}</element>
 
 
 {% endblock content %}

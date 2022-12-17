@@ -1,51 +1,40 @@
+{% load static %}
 {% if user.is_authenticated %}
-<a href="{% url 'logout' %}">
-    <h3>
-        Logout
-    </h3>
-</a>
 
-<h3>
-    <a href="{% url 'emp-home' %}">Home</a>
+    <div class="main_hd">
+        <a href="{% url 'emp-home' %}"><button class="wstitle">RIF E-Portal</button></a>
+        <a href="{% url 'donations' %}"><button class="feature">Donations</button></a>
+        <a href="{% url 'benificiaries' %}"><button class="feature">Beneficiaries</button></a>
+        <a href="{% url 'all-posts' %}"><button class="feature">News & Blogs</button></a>
+        <a href="{% url 'faqs' %}"><button class="feature">FAQs</button></a>
+        <a href="{% url 'subscribers' %}"><button class="feature">Subscribers</button></a>
+        <a href="{% url 'donors' %}"><button class="feature">Donors</button></a>
+        <a href="{% url 'blood-donations' %}"><button class="feature">Blood Donors</button></a>
 
-    <a href="{% url 'all-posts' %}">Posts</a>
+        <!-- <button class="pfp" id="pfp0"></button> -->
+        <a href="{% url 'logout' %}">
+            <button class="loginbtn" id="subscrib0" style="background: linear-gradient( #f30505,#a00202);">
+                Logout
+            </button>
+        </a>
+    </div>
 
-    <a href="{% url 'departments' %}">Departments</a>
-
-    <a href="{% url 'benificiaries' %}">Benificiaries</a>
-
-    <a href="{% url 'donors' %}">Donors</a>
-
-    <a href="{% url 'blood-donations' %}">Blood Donors</a>
-
-    <a href="{% url 'donations' %}">Donations</a>
-
-    <a href="{% url 'subscribers' %}">Subscribers</a>
-
-    <a href="{% url 'faqs' %}">FAQs</a>
-
-    <br>
-
-    <a href="{% url 'drives' %}">Active Drives</a>
-
-    <a href="{% url 'past-drives' %}">Past Drives</a>
-
-    <a href="{% url 'ambulances' %}">Ambulances</a>
-
-    <a href="{% url 'inventory' %}">Inventory</a>
-
-    <a href="{% url 'dispensary' %}">Dispensary</a>
-
-    <a href="{% url 'blood-bank' %}">Blood Bank</a>
-
-    <a href="{% url 'pitches' %}">Pitches</a>
-
-    <a href="{% url 'team' %}">Team</a>
-    <br>
-
-    <a href="{% url 'edit-profile' request.user.id %}">Edit Personal Profile</a>
-
-    <a href="{% url 'volunteers' %}">Volunteers</a>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">⇡</button>
+</div>
+<div class="main_hd" style="background-color: #01386C; padding: 0.5%;">
+    <center>
+        <a href="{% url 'inventory' %}"><button class="feature">Inventory</button></a>
+        <a href="{% url 'drives' %}"><button class="feature">Active Drives</button></a>
+        <a href="{% url 'past-drives' %}"><button class="feature">Past Drives</button></a>
+        <a href="{% url 'ambulances' %}"><button class="feature">Ambulances</button></a>
+        <a href="{% url 'blood-bank' %}"><button class="feature">Blood Bank</button></a>
+        <a href="{% url 'departments' %}"><button class="feature">Departments</button></a>
+        <a href="{% url 'dispensary' %}"><button class="feature">Dispensary</button></a>
+        <a href="{% url 'pitches' %}"><button class="feature">Pitches</button></a>
+        <a href="{% url 'volunteers' %}"><button class="feature">Volunteers</button></a>
+        <a href="{% url 'team' %}"><button class="feature">Team</button></a>
+    </center>
+</div>
 </h3>
 
 {% if messages %}
@@ -56,24 +45,35 @@
 
 
 {% else %}
+<div class="main_hd">
+    <a href="{% url 'visitor-home' %}"><button class="wstitle">Rehmat-e-Insaniyat</button></a>
+    <a href="{% url 'about' %}"><button class="feature">About Us</button></a>
+    <a href="{% url 'vis-blogs' %}"><button class="feature">News & Posts</button></a>
+    <a href="{% url 'donate' %}"><button class="feature">Donate</button></a>
+    <a href="{% url 'contact-us' %}"><button class="feature">Contact</button></a>
+    <a href="{% url 'become-volunteer' %}"><button class="feature">Volunteer</button></a>
+    
     <a href="{% url 'login' %}">
-        <h3>
-            Employee Login
-        </h3>
+        <button class="loginbtn">Login</button>
     </a>
+    <a href="{% url 'subscribe' %}"><button class="goldbtn">Subscribe</button></a>
+</div>
 
-    <a href="{% url 'visitor-home' %}">
-        <h3>
-            Home
-        </h3>
-    </a>
+<div class="main_hd" style="background-color: #01386C; padding: 0.5%;">
+    <center>
+        <a href="{% url 'vis-drives' %}"><button class="feature">Active Drives</button></a>
+        <a href="{% url 'vis-past-drives' %}"><button class="feature">Past Drives</button></a>
+        <a href="{% url 'donate-blood' %}"><button class="feature">Donate Blood</button></a>
+        <a href="{% url 'vis-departments' %}"><button class="feature">Departments</button></a>
+        <a href="{% url 'team' %}"><button class="feature">Team</button></a>
+        <a href="{% url 'faqs' %}"><button class="feature">FAQs</button></a>
+    </center>
+</div>
 
 {% if messages %}
-    {% for message in messages %}
-        {{ message }}
-    {% endfor %} 
+{% for message in messages %}
+{{ message }}
+{% endfor %} 
 {% endif %}
 
 {% endif %}
-
-<hr>
