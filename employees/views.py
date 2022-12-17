@@ -1,3 +1,4 @@
+from django.forms import widgets
 from django.shortcuts import render, redirect, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
@@ -592,6 +593,7 @@ def deliver_med_item(request, pk):
     return render(request, 'employees/deliver.html', {'obj': item})
     
 def blood_bank(request):
+    msg = 'None'
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
     else:
@@ -603,6 +605,7 @@ def blood_bank(request):
 
     context = {
         'items': items,
+        'msg':msg,
     }
     return render(request, 'employees/blood_bank.html', context)
 

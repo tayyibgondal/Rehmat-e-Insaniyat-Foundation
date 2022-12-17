@@ -19,14 +19,18 @@
 
 </head>
 <body style="margin: 0;">
-    
-    {% include 'navbar.html' %}
-    <div data-aos="fade-up"> 
-    {% block content %}
-    {% endblock content %}
-    </div>
-    
-    {% include 'footer.html' %}
+    <header>
+        {% include 'navbar.html' %}
+    </header>
+    <content>
+        <div data-aos="fade-up"> 
+        {% block content %}
+        {% endblock content %}
+        </div>
+    </content>
+    <footer>
+        {% include 'footer.html' %}
+    </footer>
 </body>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>

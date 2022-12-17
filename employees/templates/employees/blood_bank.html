@@ -16,6 +16,9 @@
             <a href="{% url 'blood-bank' %}"><button class="pst_filter">See All</button></a>
         </td>
         <td width="70%">
+            {% if msg != 'None' %}
+            <div class="error" style="width: 75%; margin-left: 5%;">{{ msg }}</div>
+            {% endif %}
             <a href="{% url 'add-to-blood-bank'%}"><button class="blue_button">+ Add Item</button></a>
             
             {% for item in items %}

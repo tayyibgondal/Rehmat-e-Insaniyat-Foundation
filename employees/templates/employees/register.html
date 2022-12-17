@@ -1,20 +1,42 @@
 {% extends 'main.html' %}
 {% block content %} 
 
+
 <div>
+    <center>
+        <div class="pg_head_container" style="width: 50%;">
+            <element class="pg_head" style="margin-left: -10%; margin-bottom: 5%;">Register</element>
+            
+            <element class="caution" style="margin-left: -10%;">
+                You can fill out this form only if you are an officially employed staff memeber.
+            </element>
+            
+        </div>
     <form method="POST" action="">
         {% csrf_token %}
+        <table style = "margin-top: 5%;">
         {% for field in form %}
-        <div>
-            {{ field }}
-        </div>
+        <tr>
+            <td>
+                <div class="form__group pg_txt">
+                    {{field.label}}
+                </div>
+            </td>
+            <td>
+                <div class="form__group input" style="margin-bottom: -1%;">
+                    {{ field }}
+                </div>
+            </td>
+        </tr>
         {% endfor %}
-        <input type="blue_button" value="Register"/>
+        </table>
+        <input class="blue_button" style="margin-left: -5%;" value="Register"/>
         
-        <p>Already have an account?</p>
-        <a href="{% url 'login' %}"><button class="pst_txt_hyper">Sign in</button></a>
-        <div class="usr_rect">{{ form.role }}</div>
+        <element class="pg_txt"> Already have an account?
+        <a href="{% url 'login' %}"><element class="pst_txt_hyper">Sign in</element></a></element>
     </form>
+    </center>
+
 </div>
 
 {% endblock content %}
