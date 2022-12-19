@@ -1,19 +1,70 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<center>
-<div class="pg_head_container">
-    <element class="pg_head" style="margin-left: -10%;">Please fill out this form.</element>
+
+    <div class="pg_head_container" style="margin-top: 5%;">
+        <a href="{{ request.META.HTTP_REFERER }}"><button class="blue_button" style="margin-left: -5%;">Go back</button></a>
+        {% if request.resolver_match.url_name == 'create-post' or request.resolver_match.url_name == 'update-post' %}
+            <element class="pg_head">Create a post</element>
+            <element class="pg_txt">Fill out the following details correctly to create a post.</element> 
     
-    <!-- <element class="pg_txt" style="margin-left: -10%;">
-        Make a change by donating to those in need of it.
-    </element> -->
+        {% elif request.resolver_match.url_name == 'create-department' or request.resolver_match.url_name == 'update-department' %} 
+            <element class="pg_head">Create a department</element>
+            <element class="pg_txt">Fill out the following details correctly to create an department.</element>
     
-</div>
+        {% elif request.resolver_match.url_name == 'create-benificiary' or request.resolver_match.url_name == 'update-benificiary' %} 
+            <element class="pg_head">Add a beneficiary</element>
+            <element class="pg_txt">Fill out the following details correctly to add a beneficiary.</element>
+    
+        {% elif request.resolver_match.url_name == 'create-drive' or request.resolver_match.url_name == 'update-drive' or request.resolver_match.url_name == 'update-past-drive' %} 
+            <element class="pg_head">Add a drive</element>
+            <element class="pg_txt">Fill out the following details correctly to create a drive.</element>
+    
+        {% elif request.resolver_match.url_name == 'add-ambulance' or request.resolver_match.url_name == 'update-ambulance' %} 
+            <element class="pg_head">Add an ambulance</element>
+            <element class="pg_txt">Fill out the following details correctly to create an ambulance.</element>
+    
+        {% elif request.resolver_match.url_name == 'add-to-inventory' or request.resolver_match.url_name == 'update-item' %} 
+            <element class="pg_head">Add to inventory</element>
+            <element class="pg_txt">Fill out the following details correctly to add an item to the inventory.</element>
+    
+        {% elif request.resolver_match.url_name == 'add-to-dispensary' or request.resolver_match.url_name == 'update-dispensary-item' %} 
+            <element class="pg_head">Add to dispensary</element>
+            <element class="pg_txt">Fill out the following details correctly to add an item to the dispensary.</element>
+    
+        {% elif request.resolver_match.url_name == 'add-to-blood-bank' %} 
+            <element class="pg_head">Add to blood bank</element>
+            <element class="pg_txt">Fill out the following details correctly to add to blood bank.</element>
+    
+        {% elif request.resolver_match.url_name == 'answer-question' %} 
+            <element class="pg_head">Add an answer</element>
+            <element class="pg_txt">Fill out with an appropriate answer.</element>
+    
+        {% elif request.resolver_match.url_name == 'edit-profile' %} 
+            <element class="pg_head">Edit profile</element>
+            <element class="pg_txt">Modify your credentials here.</element>
+        
+        {% elif request.resolver_match.url_name == 'donate' %} 
+            <element class="pg_head">Donate</element>
+            <element class="pg_txt">Make a change by donating to those in dire need of it 
+                and those whose life actually depends on your economic aid.</element>
+        {% elif request.resolver_match.url_name == 'donate-blood' %} 
+            <element class="pg_head">Donate Blood</element>
+            <element class="pg_txt">Every drop of every blood type counts, make yours a part of it.</element>
+        {% elif request.resolver_match.url_name == 'become-volunteer' %} 
+            <element class="pg_head">Volunteer</element>
+            <element class="pg_txt">Be a part of the force that is involved day and night, in changing people's lives, for the better.</element>
+        {% elif request.resolver_match.url_name == 'contact-us' %} 
+            <element class="pg_head">Contact us</element>
+            <element class="pg_txt">Want to contact us? Please fill out this form!</element>    
+        {% elif request.resolver_match.url_name == 'subscribe' %} 
+            <element class="pg_head">Subscribe to the newsletter</element>
+            <element class="pg_txt">Get to know what drives are starting when and stay up to date with the current states of welfare drives.</element> 
+        {% endif %}
+    </div>
 
 
-
-<div style="margin-top: -10%;">
+<div style="margin-top: -10%; margin-left: 5%;">
     <table width=50% border="0">
         <div class="pg_head_container_center" style="margin-top: 12%;">
             <div class="form__group form__group">
@@ -36,9 +87,9 @@
             </div>
         </div>
     </table>
-    <input type="submit" style="margin-left: -5%;" class="blue_button" value="Submit"/>
+    <input type="submit" style="margin-left: -5%; margin-bottom: 5%;" class="blue_button" value="Submit"/>
 </form>
 </div>
-</center>
+
 
 {% endblock content %}

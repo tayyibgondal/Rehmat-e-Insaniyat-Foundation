@@ -21,7 +21,7 @@
 
     <button onclick="topFunction()" id="myBtn" title="Go to top">⇡</button>
 </div>
-<div class="main_hd" style="background-color: #01386C; padding: 0.5%;">
+<div class="main_hd" id="pg_subheader" style="background-color: #01386C; padding: 0.5%;">
     <center>
         <a href="{% url 'inventory' %}"><button class="feature">Inventory</button></a>
         <a href="{% url 'drives' %}"><button class="feature">Active Drives</button></a>
@@ -61,7 +61,7 @@
     <button onclick="topFunction()" id="myBtn" title="Go to top">⇡</button>
 </div>
 
-<div class="main_hd" style="background-color: #01386C; padding: 0.5%;">
+<div class="main_hd" id="pg_subheader" style="background-color: #01386C; padding: 0.5%;">
     <center>
         <a href="{% url 'vis-drives' %}"><button class="feature">Active Drives</button></a>
         <a href="{% url 'vis-past-drives' %}"><button class="feature">Past Drives</button></a>

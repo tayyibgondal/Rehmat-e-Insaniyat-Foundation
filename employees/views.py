@@ -1,7 +1,7 @@
 from django.forms import widgets
 from django.shortcuts import render, redirect, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -17,7 +17,23 @@ from .forms import (PostForm, DepartmentForm, BenificiaryForm, DriveForm, PastDr
 from django.utils import timezone
 
 def home(request):
-    return render(request, 'employees/home.html')
+    donations_sum = Donation.objects.aggregate(Sum('amount')).get('amount__sum')
+    items_sum = int(Inventory.objects.aggregate(Sum('item_count')).get('item_count__sum'))
+    volunteers_sum = Volunteer.objects.all().count()
+
+    recent_donations = Donation.objects.all().order_by('-id')[:3]
+    items_to_runout = Inventory.objects.all().order_by('item_count')[:3]
+    recent_volunteers = Volunteer.objects.all().order_by('-id')[:3] 
+  
+    context = {
+        'donations_sum': donations_sum,
+        'items_sum': items_sum,
+        'volunteers_sum': volunteers_sum,
+        'recent_donations': recent_donations,
+        'items_to_runout': items_to_runout,
+        'recent_volunteers': recent_volunteers,
+    }
+    return render(request, 'employees/home.html', context)
 
 def LoginView(request):
     # if user was already logged in

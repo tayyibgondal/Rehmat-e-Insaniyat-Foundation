@@ -21,9 +21,10 @@
             {% else %}
             <a href="{% url 'ask-question' %}"><button class="blue_button">+ Ask a question</button></a>
             {% endif %}
-                <table style="margin-left: 5%;" > 
-                    {% for faq in faqs %}
-                    {% if request.user.is_authenticated %}
+            <div class="pst_container" style="margin-left: 5%; width: 90%;">
+            <table style="margin-left: 5%;" > 
+                {% for faq in faqs %}
+                {% if request.user.is_authenticated %}
                     <tr>
                         <td width=5%>
                             <div class="question">
@@ -53,7 +54,7 @@
                             <a href="{% url 'remove-faq' faq.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
                             <div style="margin-bottom: 5%;"></div>
                         </td>
-                    </tr>    
+                    </tr>   
                     {% else %}
                     {% if faq.answer == '' or faq.answer == None %}
                     {% else %}
@@ -82,9 +83,10 @@
                         </td>
                     </tr>   
                     {% endif %}
-                {% endif %}
-            {% endfor %}
-            </table>
+                    {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
         </td>
     </tr>
 </table>
