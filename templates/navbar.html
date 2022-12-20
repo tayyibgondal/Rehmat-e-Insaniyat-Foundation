@@ -23,24 +23,27 @@
 </div>
 <div class="main_hd" id="pg_subheader" style="z-index: 1; background-color: #01386C; padding: 0.5%;">
     <center>
-        <a href="{% url 'inventory' %}"><button class="feature">Inventory</button></a>
-        <a href="{% url 'drives' %}"><button class="feature">Active Drives</button></a>
-        <a href="{% url 'past-drives' %}"><button class="feature">Past Drives</button></a>
+        <div class="dropdown">
+            <button class="dropbtn feature">Drives ▼</button>
+            <div class="dropdown-content">
+                <a href="{% url 'drives' %}"><button class="feature">Active Drives</button></a>
+                <a href="{% url 'past-drives' %}"><button class="feature">Past Drives</button></a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn feature">Resources and Inventory ▼</button>
+            <div class="dropdown-content">
+                <a href="{% url 'inventory' %}"><button class="feature">Inventory</button></a>
+                <a href="{% url 'blood-bank' %}"><button class="feature">Blood Bank</button></a>
+                <a href="{% url 'dispensary' %}"><button class="feature">Dispensary</button></a>
+                
+            </div>
+        </div>
         <a href="{% url 'ambulances' %}"><button class="feature">Ambulances</button></a>
-        <a href="{% url 'blood-bank' %}"><button class="feature">Blood Bank</button></a>
         <a href="{% url 'departments' %}"><button class="feature">Departments</button></a>
-        <a href="{% url 'dispensary' %}"><button class="feature">Dispensary</button></a>
         <a href="{% url 'pitches' %}"><button class="feature">Pitches</button></a>
         <a href="{% url 'volunteers' %}"><button class="feature">Volunteers</button></a>
         <a href="{% url 'team' %}"><button class="feature">Team</button></a>
-        <div class="dropdown">
-            <button class="dropbtn">Dropdown</button>
-            <div class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-            </div>
-          </div>
     </center>
 </div>
 </h3>
