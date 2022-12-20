@@ -167,32 +167,3 @@
 .sticky + .content {
     padding-top: 102px;
 }
-
-.dropbtn {
-    background-color: transparent;
-  }
-  
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    border-radius: 10px;
-    background-color: #058DF3;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  .dropdown-content a {
-    transition-duration: 1s;
-    display: block;
-  }
-  
-  .dropdown:hover .dropdown-content {
-    display: block;
-    transition-duration: 1s;
-  }

@@ -6,35 +6,34 @@
 <div class="main_ft">
     <table class="foottable" width = 95%>
         <tr>
-            <td width=25%>    <element class="foothead">Know us</element>             </td>
-            <td width=25%>    <element class="foothead">Frequently Asked</element>    </td>
-            <td width=25%>    <element class="foothead">Our Stories</element>         </td>
-            <td width=25%>    <element class="foothead">Useful Links</element>        </td>
-        </tr>
-        
-        <tr>
-            <td width=25%> <element class="footlink">Facebook</element> </td>
-            <td width=25%> <element class="footlink">What is your NGO About?</element> </td>
-            <td width=25%> <element class="footlink">The 20XX Earthquake Drive</element> </td>
-            <td width=25%> <element class="footlink">Home</element> </td>
-        </tr>
-        <tr>
-            <td> <element class="footlink">Twitter</element> </td>
-            <td> <element class="footlink">How can I become an volunteer?</element> </td>
-            <td> <element class="footlink">The 20XX Orphanage Drive</element> </td>
-            <td> <element class="footlink">Contact Us</element> </td>
-        </tr>
-        <tr>
-            <td> <element class="footlink">Instagram</element> </td>
-            <td> <element class="footlink">How do I work full-time?</element> </td>
-            <td> <element class="footlink">The XYZ Award</element> </td>
-            <td> <element class="footlink">Donate</element> </td>
-        </tr>
-        <tr>
-            <td> <element class="footlink">Discord</element> </td>
-            <td> <element class="footlink">Are you trustworthy?</element> </td>
-            <td> <element class="footlink"></element> </td>
-            <td> <element class="footlink">News & Blogs</element> </td>
+            <td width=25% style="vertical-align: top;">
+                <element class="foothead">Know us</element>
+                <element class="footlink">Office Opposite Shell Pump, Mandi Bahauddin Road, Malakwal District, Mandibhauddin</element>
+                <element class="footlink">Zipcode: 50530</element>
+                <element class="footlink">+92-302-6707069</element>
+                <element class="footlink">+92-345-6330066</element>
+            </td>
+            <td width=25% style="vertical-align: top;">   
+                <element class="foothead">Frequently Asked</element>
+                <element class="footlink">What is your NGO About?</element>
+                <element class="footlink">How can I become an volunteer?</element>
+                <element class="footlink">How do I work full-time?</element>
+                <element class="footlink">Are you trustworthy?</element>
+
+            </td>
+            <td width=25% style="vertical-align: top;">    
+                <element class="foothead">Our Stories</element>
+                <element class="footlink">The 20XX Earthquake Drive</element>
+                <element class="footlink">The 20XX Orphanage Drive</element>
+                <element class="footlink">The XYZ Award</element>
+            </td>
+            <td width=25% style="vertical-align: top;">    
+                <element class="foothead">Useful Links</element>
+                <a href="{% url 'visitor-home' %}"><element class="footlink">Home</element></a>
+                <a href="{% url 'contact-us' %}"><element class="footlink">Contact Us</element></a>
+                <a href="{% url 'donate' %}"><element class="footlink">Donate</element></a>
+                <a href="{% url 'vis-blogs' %}"><element class="footlink">News & Blogs</element></a>
+            </td>
         </tr>
     </table>
 </div>

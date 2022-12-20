@@ -14,7 +14,6 @@ function scrollFunction() {
 
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
-  console.log('Help me please!');
   var i = 1;                  //  set your counter to 1
 
   function myLoop() {         //  create a loop function
