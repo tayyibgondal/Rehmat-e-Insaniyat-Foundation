@@ -42,13 +42,19 @@
                     </td>
                     {% if request.user.is_authenticated %}
                     <td>
+                        {% if perms.employees.change_volunteer %}
                         <a href="{% url 'make-vol-available' volunteer.id%}"><button class="blue_button">Make Available</button></a>
+                        {% endif %}
                     </td>
                     <td>
+                        {% if perms.employees.change_volunteer %}
                         <a href="{% url 'make-vol-unavailable' volunteer.id%}"><button class="blue_button">Make Unavailable</button></a>
+                        {% endif %}
                     </td>
                     <td>
+                        {% if perms.employees.delete_volunteer %}
                         <a href="{% url 'remove-volunteer' volunteer.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                        {% endif %}
                     </td>
                     {% endif %}
                 </tr>

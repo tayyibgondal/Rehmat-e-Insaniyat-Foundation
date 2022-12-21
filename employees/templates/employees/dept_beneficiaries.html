@@ -26,10 +26,14 @@
                     </td>
                     {% if request.user.is_authenticated %}
                     <td>
+                        {% if perms.employees.change_benificiary %}                      
                         <a href="{% url 'update-benificiary' benificiary.id %}"><button class="blue_button">Edit</button></a>
+                        {% endif %}
                     </td>
                     <td>
+                        {% if perms.employees.delete_benificiary %}
                         <a href="{% url 'remove-benificiary' benificiary.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                        {% endif %}
                     </td>
                     {% endif %}
                 </tr>

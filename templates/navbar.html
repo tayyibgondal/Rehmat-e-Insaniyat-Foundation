@@ -2,15 +2,21 @@
 {% if user.is_authenticated %}
 
     <div class="main_hd">
-        <a href="{% url 'emp-home' %}"><button class="wstitle">RIF E-Portal</button></a>
-        <a href="{% url 'donations' %}"><button class="feature">Donations</button></a>
-        <a href="{% url 'benificiaries' %}"><button class="feature">Beneficiaries</button></a>
-        <a href="{% url 'all-posts' %}"><button class="feature">News & Blogs</button></a>
-        <a href="{% url 'faqs' %}"><button class="feature">FAQs</button></a>
-        <a href="{% url 'subscribers' %}"><button class="feature">Subscribers</button></a>
-        <a href="{% url 'donors' %}"><button class="feature">Donors</button></a>
-        <a href="{% url 'blood-donations' %}"><button class="feature">Blood Donors</button></a>
-
+        <a href="{% url 'emp-home' %}">
+            <table style="vertical-align: middle; display: inline-block; margin-bottom: -5%; margin-top: -5%;">
+                <tr>
+                    <td>
+                        <button class="wstitle" style="font-family: 'Aldhabi Regular'; margin-bottom: -10%;">رحمت انسانیت</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><center>
+                        <element class="pg_txt" style="margin-top: -5%; color: white; font-size: 11px;">E-Portal</element>
+                    </center></td>
+                </tr>
+            </table>
+        </a>
+        
         <!-- <button class="pfp" id="pfp0"></button> -->
         <a href="{% url 'logout' %}">
             <button class="loginbtn" id="subscrib0" style="background: linear-gradient( #f30505,#a00202);">
@@ -18,21 +24,57 @@
             </button>
         </a>
     </div>
-
+    
     <button onclick="topFunction()" id="myBtn" title="Go to top">⇡</button>
 </div>
-<div class="main_hd" style="background-color: #01386C; padding: 0.5%;">
+<div class="main_hd" id="pg_subheader" style="z-index: 1; background-color: #01386C; padding: 0.5%;">
     <center>
-        <a href="{% url 'inventory' %}"><button class="feature">Inventory</button></a>
-        <a href="{% url 'drives' %}"><button class="feature">Active Drives</button></a>
-        <a href="{% url 'past-drives' %}"><button class="feature">Past Drives</button></a>
-        <a href="{% url 'ambulances' %}"><button class="feature">Ambulances</button></a>
-        <a href="{% url 'blood-bank' %}"><button class="feature">Blood Bank</button></a>
-        <a href="{% url 'departments' %}"><button class="feature">Departments</button></a>
-        <a href="{% url 'dispensary' %}"><button class="feature">Dispensary</button></a>
+        <a href="{% url 'all-posts' %}"><button class="feature">News & Blogs</button></a>
+        <a href="{% url 'faqs' %}"><button class="feature">FAQs</button></a>
+        <div class="dropdown">
+            <button class="dropbtn feature" style="width: max-content;">Drives ▼</button>
+            <div class="dropdown-content">
+                <a href="{% url 'drives' %}"><button class="feature">Active Drives</button></a>
+                <a href="{% url 'past-drives' %}"><button class="feature">Past Drives</button></a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn feature" style="width: max-content;">Resources and Inventory ▼</button>
+            <div class="dropdown-content">
+                <a href="{% url 'donations' %}"><button class="feature">Donations</button></a>
+                <a href="{% url 'inventory' %}"><button class="feature">Inventory</button></a>
+                <a href="{% url 'blood-bank' %}"><button class="feature">Blood Bank</button></a>
+                <a href="{% url 'dispensary' %}"><button class="feature">Dispensary</button></a>
+                <a href="{% url 'ambulances' %}"><button class="feature">Ambulances</button></a>
+                
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn feature" style="width: max-content;">Management ▼</button>
+            <div class="dropdown-content">
+                <a href="{% url 'subscribers' %}"><button class="feature">Subscribers</button></a>
+                <a href="{% url 'benificiaries' %}"><button class="feature">Beneficiaries</button></a>
+                <a href="{% url 'volunteers' %}"><button class="feature">Volunteers</button></a>
+                <a href="{% url 'team' %}"><button class="feature">Team</button></a>
+                <a href="{% url 'departments' %}"><button class="feature">Departments</button></a>
+            
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn feature" style="width: max-content;">Donors ▼</button>
+            <div class="dropdown-content">
+                <a href="{% url 'donors' %}"><button class="feature">Donors</button></a>
+                <a href="{% url 'blood-donations' %}"><button class="feature">Blood Donors</button></a>
+                
+            </div>
+        </div>
+        
         <a href="{% url 'pitches' %}"><button class="feature">Pitches</button></a>
-        <a href="{% url 'volunteers' %}"><button class="feature">Volunteers</button></a>
-        <a href="{% url 'team' %}"><button class="feature">Team</button></a>
+    
+        {% if perms.employees.add_employee %}
+        <a href="{% url 'register' %}"><button class="feature">Add new Employee</button></a>
+        {% endif %}   
+    
     </center>
 </div>
 </h3>
@@ -46,27 +88,44 @@
 
 {% else %}
 <div class="main_hd">
-    <a href="{% url 'visitor-home' %}"><button class="wstitle">Rehmat-e-Insaniyat</button></a>
-    <a href="{% url 'about' %}"><button class="feature">About Us</button></a>
-    <a href="{% url 'vis-blogs' %}"><button class="feature">News & Posts</button></a>
-    <a href="{% url 'donate' %}"><button class="feature">Donate</button></a>
-    <a href="{% url 'contact-us' %}"><button class="feature">Contact</button></a>
-    <a href="{% url 'become-volunteer' %}"><button class="feature">Volunteer</button></a>
+    <a href="{% url 'visitor-home' %}"><button class="wstitle" style="font-family: 'Aldhabi Regular'; vertical-align: middle; margin-bottom: -1%; margin-top: -1%;">رحمت انسانیت</button></a>
     
     <a href="{% url 'login' %}">
-        <button class="loginbtn">Login</button>
+        <button class="loginbtn">Employee Login</button>
     </a>
     <a href="{% url 'subscribe' %}"><button class="goldbtn">Subscribe</button></a>
+    
+    <button onclick="topFunction()" id="myBtn" title="Go to top">⇡</button>
 </div>
 
-<div class="main_hd" style="background-color: #01386C; padding: 0.5%;">
+<div class="main_hd" id="pg_subheader" style="z-index: 1; background-color: #01386C; padding: 0.5%;">
     <center>
-        <a href="{% url 'vis-drives' %}"><button class="feature">Active Drives</button></a>
-        <a href="{% url 'vis-past-drives' %}"><button class="feature">Past Drives</button></a>
-        <a href="{% url 'donate-blood' %}"><button class="feature">Donate Blood</button></a>
-        <a href="{% url 'vis-departments' %}"><button class="feature">Departments</button></a>
-        <a href="{% url 'team' %}"><button class="feature">Team</button></a>
-        <a href="{% url 'faqs' %}"><button class="feature">FAQs</button></a>
+        <a href="{% url 'about' %}"><button class="feature">About Us</button></a>
+        <a href="{% url 'vis-blogs' %}"><button class="feature">News & Posts</button></a>
+        <a href="{% url 'contact-us' %}"><button class="feature">Contact</button></a>
+        <a href="{% url 'vis-faqs' %}"><button class="feature">FAQs</button></a>
+        <div class="dropdown">
+            <button class="dropbtn feature" style="width: max-content;">Drives ▼</button>
+            <div class="dropdown-content">
+                <a href="{% url 'vis-drives' %}"><button class="feature">Active Drives</button></a>
+                <a href="{% url 'vis-past-drives' %}"><button class="feature">Past Drives</button></a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn feature" style="width: max-content;">Join us ▼</button>
+            <div class="dropdown-content">
+                <a href="{% url 'become-volunteer' %}"><button class="feature">Volunteer</button></a>
+                <a href="{% url 'donate' %}"><button class="feature">Donate</button></a>
+                <a href="{% url 'donate-blood' %}"><button class="feature">Donate Blood</button></a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn feature" style="width: max-content;">Information ▼</button>
+            <div class="dropdown-content">
+                <a href="{% url 'vis-departments' %}"><button class="feature">Departments</button></a>
+                <a href="{% url 'vis-team' %}"><button class="feature">Team</button></a>
+            </div>
+        </div>
     </center>
 </div>
 

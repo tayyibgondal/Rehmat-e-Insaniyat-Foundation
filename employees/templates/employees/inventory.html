@@ -18,7 +18,10 @@
           </td>
           <td width="70%">
             {% if request.user.is_authenticated %}
-            <a href="{% url 'add-to-inventory'%}"><button class="blue_button">+ Add Purchase</button></a>
+              {% if perms.employees.add_inventory %}
+                i<a href="{% url 'add-to-inventory'%}"><button class="blue_button">+ Add Purchase</button></a>
+              {% endif %}
+
             {% endif %}
             
             {% for item in items %}
@@ -37,10 +40,14 @@
                     </td>
                     {% if request.user.is_authenticated %}
                     <td style="vertical-align: top;">
+                      {% if perms.employees.change_inventory %}
                       <a href="{% url 'update-item' item.id %}"><button class="blue_button">Edit</button></a>
+                      {% endif %}
                     </td>
                     <td style="vertical-align: top;">
+                      {% if perms.employees.change_inventory %}
                       <a href="{% url 'deliver-item' item.id %}"><button class="blue_button">Deliver</button></a>
+                      {% endif %}
                     </td>
                     {% endif %}
               </tr>  

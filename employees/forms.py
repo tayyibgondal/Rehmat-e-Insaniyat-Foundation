@@ -11,7 +11,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = Employee
-        fields = ('first_name', 'last_name', 'username', 'email','role')
+        fields = ('first_name', 'last_name', 'username', 'email','role', 'is_staff')
 
 
 class CustomUserChangeForm(UserChangeForm):

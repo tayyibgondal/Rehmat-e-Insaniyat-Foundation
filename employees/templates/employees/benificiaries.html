@@ -17,8 +17,10 @@
             <a href="{% url 'benificiaries' %}"><button class="pst_filter">See All</button></a>
         </td>
         <td width="70%">
+            {% if perms.employees.add_benificiary %}
             <a href="{% url 'create-benificiary'%}"><button class="blue_button">+ Add Beneficiary</button></a>
-            
+            {% endif %} 
+
             {% for benificiary in benificiaries %}
             <table class="pst_container" style="width: 80%; margin-left: 5%;">
                 <tr>
@@ -28,10 +30,14 @@
                         <div class="pst_txt">{{ benificiary.age }}, {{ benificiary.gender }}</div>
                     </td>
                     <td width=30%>
+                        {% if perms.employees.change_benificiary %}
                         <a href="{% url 'update-benificiary' benificiary.id %}"><button class="blue_button">Edit Details</button></a>
+                        {% endif %}   
                     </td>
                     <td>
+                        {% if perms.employees.delete_benificiary %}
                         <a href="{% url 'remove-benificiary' benificiary.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                        {% endif %}   
                     </td>
                 </tr>
                 

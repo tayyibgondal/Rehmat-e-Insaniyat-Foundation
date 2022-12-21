@@ -21,13 +21,14 @@
             {% else %}
             <a href="{% url 'ask-question' %}"><button class="blue_button">+ Ask a question</button></a>
             {% endif %}
-                <table style="margin-left: 5%;" > 
-                    {% for faq in faqs %}
-                    {% if request.user.is_authenticated %}
+            <div class="pst_container" style="margin-left: 5%; width: 90%;">
+            <table style="margin-left: 5%;" > 
+                {% for faq in faqs %}
+                {% if request.user.is_authenticated %}
                     <tr>
                         <td width=5%>
                             <div class="question">
-                                Q
+                                Q. 
                             </div>
                         </td>
                         <td>
@@ -39,28 +40,34 @@
                     <tr>
                         <td style="vertical-align: top;">
                             <div class="question">
-                                A
+                                A. 
                             </div>
                         </td>
                         <td>
                             {% if faq.answer == '' or faq.answer == None %}
                             <div class="error" style="width: 90%;">No answer submitted.</div>
-                            <a href="{% url 'answer-question' faq.id %}"><button class="blue_button">Answer</button></a>
+                                {% if perms.employees.change_faq %}
+                                    <a href="{% url 'answer-question' faq.id %}"><button class="blue_button">Answer</button></a>
+                                {% endif %}
                             {% else %}
                             <div class="answer" style="margin-bottom: 0%;">{{ faq.answer }}</div>
-                            <a href="{% url 'answer-question' faq.id %}"><button class="blue_button">Edit</button></a>
+                                {% if perms.employees.change_faq %}
+                                <a href="{% url 'answer-question' faq.id %}"><button class="blue_button">Edit</button></a>
+                                {% endif %}
                             {% endif %}
-                            <a href="{% url 'remove-faq' faq.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                            {% if perms.employees.delete_faq %}
+                                <a href="{% url 'remove-faq' faq.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                            {% endif %}
                             <div style="margin-bottom: 5%;"></div>
                         </td>
-                    </tr>    
+                    </tr>   
                     {% else %}
                     {% if faq.answer == '' or faq.answer == None %}
                     {% else %}
                     <tr>
                         <td width=5%>
                             <div class="question">
-                                Q
+                                Q. 
                             </div>
                         </td>
                         <td>
@@ -74,7 +81,7 @@
                     <tr>
                         <td style="vertical-align: top;">
                             <div class="question">
-                                A
+                                A. 
                             </div>
                         </td>
                         <td>
@@ -82,9 +89,10 @@
                         </td>
                     </tr>   
                     {% endif %}
-                {% endif %}
-            {% endfor %}
-            </table>
+                    {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
         </td>
     </tr>
 </table>

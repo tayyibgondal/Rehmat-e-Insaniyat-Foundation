@@ -106,8 +106,8 @@ class PastDrive(models.Model):
 class Donation(models.Model):
     donor = models.ForeignKey(Donor, on_delete=models.SET_NULL, null=True)
     amount = models.FloatField()
-    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
-    drive = models.ForeignKey(Drive, on_delete=models.SET_NULL, null=True)
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
+    drive = models.ForeignKey(Drive, on_delete=models.SET_NULL, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

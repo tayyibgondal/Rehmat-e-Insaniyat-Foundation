@@ -17,7 +17,9 @@
         </td>
         <td width="70%">
             {% if request.user.is_authenticated %}
+                {% if perms.employees.add_department %}
                 <a href="{% url 'create-department'%}"><button class="blue_button">+ Add Department</button></a>
+                {% endif %} 
             {% endif %}
             
             {% for department in departments %}
@@ -32,10 +34,14 @@
                         <a href="{% url 'view-department-beneficiaries' department.name %}"><button class="blue_button">View Beneficiaries</button></a>
                     </td>
                     <td width=30%>
+                        {% if perms.employees.change_department %}
                         <a href="{% url 'update-department' department.id %}"><button class="blue_button">Edit</button></a>
+                        {% endif %} 
                     </td>
                     <td>
+                        {% if perms.employees.delete_department %}
                         <a href="{% url 'remove-department' department.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                        {% endif %} 
                     </td>
                     {% endif %}
                 </tr>

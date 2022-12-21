@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rehmat-e-Insaniyat</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/blue_btn.css' %}">
@@ -16,17 +16,22 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/employee_home.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/featured_items.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dropdown.css' %}">
 
 </head>
 <body style="margin: 0;">
-    
-    {% include 'navbar.html' %}
-    <div data-aos="fade-up"> 
-    {% block content %}
-    {% endblock content %}
-    </div>
-    
-    {% include 'footer.html' %}
+    <header>
+        {% include 'navbar.html' %}
+    </header>
+    <content>
+        <div data-aos="fade-up"> 
+        {% block content %}
+        {% endblock content %}
+        </div>
+    </content>
+    <footer>
+        {% include 'footer.html' %}
+    </footer>
 </body>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -37,4 +42,5 @@
     </script>
 <script defer src="{% static 'javascript/back_to_top_btn.js' %}"></script>
 <script defer src="{% static 'javascript/login_verifier.js' %}"></script>
+<script defer src="{% static 'javascript/sticky_header.js' %}"></script>
 </html>

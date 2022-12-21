@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="pg_head_container">
+    <element class="pg_head">News & Posts</element>
+</div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <element class="pg_txt">{{post_count}} posts available.</element>
+            <form method="GET" action="{% url 'vis-blogs' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search Posts...">
+            </form>
+            
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'vis-blogs' %}"><button class="pst_filter">See All</button></a>
+            {% for topic in topics %}
+            <a href="{% url 'vis-blogs' %}?q={{topic.name}}"><div class="pst_filter">{{ topic.name }}</div></a>
+            {% endfor %}
+        </td>
+        <td width="70%">           
+            {% for post in posts %}
+            <table class="pst_container" style="width: 80%; margin-left: 5%;">
+                <tr width=100%>
+                    <td width=85%>
+                        <div class="pst_title">{{ post.author.username }}</div>
+                        <element class="pst_txt" style="padding-bottom: 0%;">{{post.title}}</element>
+                        <element class="pst_txt" style="display: block; font-size: 18px; margin-top: 0%;">{{ post.created }}</element>
+                    </td>
+                    <td>
+                        <a href="{% url 'vis-post' post.id %}"><button class="blue_button">Read</button></a>
+                    </td>
+                </tr>
+                
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+
+
+{% endblock content %}

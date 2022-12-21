@@ -20,7 +20,9 @@
         </td>
         <td width="70%">
           {% if request.user.is_authenticated %}
-          <a href="{% url 'create-drive'%}"><button class="blue_button">+ Add a drive</button></a>
+            {% if perms.employees.add_drive %}
+            <a href="{% url 'create-drive'%}"><button class="blue_button">+ Add a drive</button></a>
+            {% endif %}
           {% endif %}
           
           {% for drive in drives %}
@@ -43,10 +45,15 @@
                     <element class="pst_txt" style="display: block; font-size: 18px; margin-top: 0%;">{{ drive.start_date }}</element>
                 </td>
                 <td style="vertical-align: top;">
-                    <element class="pst_funds" id="pst_funds">PKR {{drive.required_funds}}</element>
+                    <element class="pst_funds" id="pst_funds">Req: PKR {{drive.required_funds}}</element>
+                    <element class="pst_funds" id="pst_funds">Coll: PKR {{drive.collected_funds}}</element>
                     {% if request.user.is_authenticated %}
-                    <a href="{% url 'update-drive' drive.id %}"><button class="blue_button">Edit</button></a>
-                    <a href="{% url 'terminate-drive' drive.id %}"><button class="blue_button" style="background-color: #f30505;">Terminate</button></a>
+                      {% if perms.employees.change_drive %}
+                        <a href="{% url 'update-drive' drive.id %}"><button class="blue_button">Edit</button></a>
+                      {% endif %}
+                      {% if perms.employees.delete_drive %}
+                        <a href="{% url 'terminate-drive' drive.id %}"><button class="blue_button" style="background-color: #f30505;">Terminate</button></a>
+                      {% endif %}
                     {% endif %}
                 </td>
             </tr>  

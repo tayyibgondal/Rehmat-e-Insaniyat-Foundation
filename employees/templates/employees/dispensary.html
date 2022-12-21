@@ -16,7 +16,9 @@
             <a href="{% url 'dispensary' %}"><button class="pst_filter">See All</button></a>
         </td>
         <td width="70%">
+            {% if perms.employees.add_dispensary %}
             <a href="{% url 'add-to-dispensary'%}"><button class="blue_button">+ Add Medicine</button></a>
+            {% endif %}
             
             {% for item in items %}
             <table class="pst_container" style="width: 80%; margin-left: 5%;">
@@ -28,10 +30,14 @@
                         <div class="pst_txt">Expires on {{ item.expiry }}</div>
                     </td>
                     <td>
+                        {% if perms.employees.change_dispensary %}
                         <a href="{% url 'update-dispensary-item' item.id %}"><button class="blue_button">Edit</button></a>
+                        {% endif %}
                     </td>
                     <td>
+                        {% if perms.employees.change_dispensary %}
                         <a href="{% url 'deliver-dispensary-item' item.id %}"><button class="blue_button">Deliver</button></a>
+                        {% endif %}
                     </td>
                 </tr>
                 

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Q
+from django.db.models import Q, Sum
+from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -15,9 +16,27 @@ from .forms import (PostForm, DepartmentForm, BenificiaryForm, DriveForm, PastDr
                      )
 from django.utils import timezone
 
+@login_required(login_url='login')
 def home(request):
-    return render(request, 'employees/home.html')
+    donations_sum = Donation.objects.aggregate(Sum('amount')).get('amount__sum')
+    items_sum = int(Inventory.objects.aggregate(Sum('item_count')).get('item_count__sum'))
+    volunteers_sum = Volunteer.objects.all().count()
 
+    recent_donations = Donation.objects.all().order_by('-id')[:3]
+    items_to_runout = Inventory.objects.all().order_by('item_count')[:3]
+    recent_volunteers = Volunteer.objects.all().order_by('-id')[:3] 
+
+    context = {
+        'donations_sum': donations_sum,
+        'items_sum': items_sum,
+        'volunteers_sum': volunteers_sum,
+        'recent_donations': recent_donations,
+        'items_to_runout': items_to_runout,
+        'recent_volunteers': recent_volunteers,
+    }
+    return render(request, 'employees/home.html', context)
+
+@csrf_exempt
 def LoginView(request):
     # if user was already logged in
     if request.user.is_authenticated:
@@ -49,6 +68,7 @@ def LoginView(request):
     return render(request, 'employees/login.html', context)
 
 @csrf_exempt
+@login_required(login_url='login')
 def register(request):
     form = CustomUserCreationForm()
     
@@ -58,8 +78,13 @@ def register(request):
         if form.is_valid():
             user = form.save(commit=False)
 
-            user.username = user.username.lower()
+            user.role = user.role.lower()
             user.save()
+
+            user_group = Group.objects.get(name=user.role) 
+            print(user_group)
+            user.groups.add(user_group)
+            print('after adding group', user_group)
 
             return redirect('login')
 
@@ -68,12 +93,15 @@ def register(request):
     }
     return render(request, 'employees/register.html', context)
 
+@login_required(login_url='login')
 def LogoutView(request):
     if request.method == 'POST':
         logout(request)
         return redirect('visitor-home')
     return render(request, 'employees/logout.html')
 
+# @allowed_users(allowed_roles=['admin', 'driver', 'manager'])
+@login_required(login_url='login')
 def all_posts(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -93,7 +121,8 @@ def all_posts(request):
         'post_count': post_count,
     }
     return render(request, 'employees/posts.html', context)
-
+    
+@login_required(login_url='login')
 def post(request, pk):
     post = Post.objects.get(id=pk)
     context = {
@@ -148,6 +177,7 @@ def delete_post(request, pk):
 
     return render(request, 'employees/delete.html', {'obj': post})
 
+@login_required(login_url='login')
 def departments(request):
     departments = Department.objects.all()
     context = {
@@ -155,6 +185,7 @@ def departments(request):
     }
     return render(request, 'employees/departments.html', context)
 
+@login_required(login_url='login')
 def create_department(request):
     form = DepartmentForm()
     if request.method == 'POST':
@@ -167,6 +198,7 @@ def create_department(request):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def update_department(request, pk):
     department = Department.objects.get(id=pk)
 
@@ -182,6 +214,7 @@ def update_department(request, pk):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def remove_department(request, pk):
     department = Department.objects.get(id=pk)
 
@@ -191,6 +224,7 @@ def remove_department(request, pk):
 
     return render(request, 'employees/delete.html', {'obj': department})
 
+@login_required(login_url='login')
 def view_department_beneficiaries(request, pk):
     benificiaries = Benificiary.objects.filter(department__name=pk)
     benificiary_count = benificiaries.count()
@@ -202,6 +236,7 @@ def view_department_beneficiaries(request, pk):
     }
     return render(request, 'employees/dept_beneficiaries.html', context) 
 
+@login_required(login_url='login')
 def benificiaries(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -222,6 +257,7 @@ def benificiaries(request):
     }
     return render(request, 'employees/benificiaries.html', context)
 
+@login_required(login_url='login')
 def create_benificiary(request):
     form = BenificiaryForm()
     if request.method == 'POST':
@@ -234,6 +270,7 @@ def create_benificiary(request):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def update_benificiary(request, pk):
     benificiary = Benificiary.objects.get(id=pk)
 
@@ -249,6 +286,7 @@ def update_benificiary(request, pk):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def remove_benificiary(request, pk):
     benificiary = Benificiary.objects.get(id=pk)
 
@@ -258,6 +296,7 @@ def remove_benificiary(request, pk):
 
     return render(request, 'employees/delete.html', {'obj': benificiary})
 
+@login_required(login_url='login')
 def blood_donations(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -277,6 +316,7 @@ def blood_donations(request):
     }
     return render(request, 'employees/blood_donations.html', context)
 
+@login_required(login_url='login')
 def donors(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -296,6 +336,7 @@ def donors(request):
     }
     return render(request, 'employees/donors.html', context)
 
+@login_required(login_url='login')
 def donations(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -312,6 +353,7 @@ def donations(request):
     }
     return render(request, 'employees/donations.html', context)
 
+@login_required(login_url='login')
 def subscribers(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -331,6 +373,7 @@ def subscribers(request):
     }
     return render(request, 'employees/subscribers.html', context)
 
+@login_required(login_url='login')
 def delete_subscriber(request, pk):
     subscriber = Subscriber.objects.get(id=pk)
 
@@ -340,6 +383,7 @@ def delete_subscriber(request, pk):
 
     return render(request, 'employees/delete.html', {'obj': subscriber})
 
+@login_required(login_url='login')
 def drives(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -358,6 +402,7 @@ def drives(request):
     }
     return render(request, 'employees/drives.html', context)
 
+@login_required(login_url='login')
 def create_drive(request):
     form = DriveForm()
     if request.method == 'POST':
@@ -370,6 +415,7 @@ def create_drive(request):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def update_drive(request, pk):
     drive = Drive.objects.get(id=pk)
 
@@ -385,6 +431,7 @@ def update_drive(request, pk):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def terminate_drive(request, pk):
     drive = Drive.objects.get(id=pk)
 
@@ -400,7 +447,7 @@ def terminate_drive(request, pk):
 
     return render(request, 'employees/terminate_drive.html', {'obj': drive})
 
-
+@login_required(login_url='login')
 def past_drives(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -419,6 +466,7 @@ def past_drives(request):
     }
     return render(request, 'employees/past_drives.html', context)
 
+@login_required(login_url='login')
 def update_past_drive(request, pk):
     drive = PastDrive.objects.get(id=pk)
 
@@ -434,6 +482,7 @@ def update_past_drive(request, pk):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def ambulances(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -452,6 +501,7 @@ def ambulances(request):
     }
     return render(request, 'employees/ambulances.html', context)
 
+@login_required(login_url='login')
 def add_ambulance(request):
     form = AmbulanceAdditionForm()
     if request.method == 'POST':
@@ -464,6 +514,7 @@ def add_ambulance(request):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def update_ambulance(request, pk):
     ambulance = Ambulance.objects.get(id=pk)
     old_driver = ambulance.driver
@@ -479,6 +530,7 @@ def update_ambulance(request, pk):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def remove_ambulance(request, pk):
     ambulance = Ambulance.objects.get(id=pk)
 
@@ -488,6 +540,7 @@ def remove_ambulance(request, pk):
 
     return render(request, 'employees/delete.html', {'obj': ambulance})
 
+@login_required(login_url='login')
 def inventory(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -503,6 +556,7 @@ def inventory(request):
     }
     return render(request, 'employees/inventory.html', context)
 
+@login_required(login_url='login')
 def add_item(request):
     form = InventoryForm()
     if request.method == 'POST':
@@ -515,6 +569,7 @@ def add_item(request):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def update_item(request, pk):
     item = Inventory.objects.get(id=pk)
 
@@ -530,6 +585,7 @@ def update_item(request, pk):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def deliver_item(request, pk):
     item = Inventory.objects.get(id=pk)
 
@@ -539,6 +595,7 @@ def deliver_item(request, pk):
 
     return render(request, 'employees/deliver.html', {'obj': item})
 
+@login_required(login_url='login')
 def dispensary(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -555,6 +612,7 @@ def dispensary(request):
     }
     return render(request, 'employees/dispensary.html', context)
 
+@login_required(login_url='login')
 def add_med_item(request):
     form = DispensaryForm()
     if request.method == 'POST':
@@ -567,6 +625,7 @@ def add_med_item(request):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def update_med_item(request, pk):
     item = Dispensary.objects.get(id=pk)
 
@@ -582,6 +641,7 @@ def update_med_item(request, pk):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def deliver_med_item(request, pk):
     item = Dispensary.objects.get(id=pk)
 
@@ -591,7 +651,9 @@ def deliver_med_item(request, pk):
 
     return render(request, 'employees/deliver.html', {'obj': item})
     
+@login_required(login_url='login')
 def blood_bank(request):
+    msg = 'None'
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
     else:
@@ -603,9 +665,11 @@ def blood_bank(request):
 
     context = {
         'items': items,
+        'msg':msg,
     }
     return render(request, 'employees/blood_bank.html', context)
 
+@login_required(login_url='login')
 def add_blood_item(request):
     form = BloodBankAdditionForm()
     if request.method == 'POST':
@@ -618,6 +682,7 @@ def add_blood_item(request):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def deliver_blood_item(request, pk):
     blood_item = BloodBank.objects.get(id=pk)
 
@@ -643,6 +708,7 @@ def deliver_blood_item(request, pk):
     
     return render(request, 'employees/deliver_blood.html', context)
 
+@login_required(login_url='login')
 def faqs(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -658,7 +724,7 @@ def faqs(request):
     }
     return render(request, 'employees/faqs.html', context)
 
-
+@login_required(login_url='login')
 def answer_question(request, pk):
     question = FAQ.objects.get(id=pk)
 
@@ -674,6 +740,7 @@ def answer_question(request, pk):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def remove_faq(request, pk):
     faq = FAQ.objects.get(id=pk)
 
@@ -683,6 +750,7 @@ def remove_faq(request, pk):
 
     return render(request, 'employees/delete.html', {'obj': faq})
 
+@login_required(login_url='login')
 def pitches(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -698,6 +766,7 @@ def pitches(request):
     }
     return render(request, 'employees/pitches.html', context)
 
+@login_required(login_url='login')
 def remove_pitch(request, pk):
     pitch = Pitch.objects.get(id=pk)
 
@@ -707,6 +776,7 @@ def remove_pitch(request, pk):
 
     return render(request, 'employees/delete.html', {'obj': pitch})
 
+@login_required(login_url='login')
 def team(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -723,7 +793,8 @@ def team(request):
         'team_count': team_count,
     }
     return render(request, 'employees/team.html', context)
-        
+
+@login_required(login_url='login')
 def profile(request, pk):
     employee = Employee.objects.get(id=pk)
     context = {
@@ -731,6 +802,7 @@ def profile(request, pk):
     }
     return render(request, 'employees/profile.html', context)
 
+@login_required(login_url='login')
 def edit_personal_profile(request, pk):
     profile = Employee.objects.get(id=pk)
 
@@ -746,6 +818,7 @@ def edit_personal_profile(request, pk):
     }
     return render(request, 'employees/model_form.html', context)
 
+@login_required(login_url='login')
 def volunteers(request):
     volunteers = Volunteer.objects.all()
 
@@ -757,6 +830,7 @@ def volunteers(request):
     }
     return render(request, 'employees/volunteers.html', context)
 
+@login_required(login_url='login')
 def remove_volunteer(request, pk):
     volunteer = Volunteer.objects.get(id=pk)
 
@@ -766,6 +840,7 @@ def remove_volunteer(request, pk):
 
     return render(request, 'employees/delete.html', {'obj': volunteer})
 
+@login_required(login_url='login')
 def available_vols(request):
     volunteers = Volunteer.objects.filter(available=True) 
 
@@ -777,6 +852,7 @@ def available_vols(request):
     }
     return render(request, 'employees/volunteers.html', context)
 
+@login_required(login_url='login')
 def make_vol_available(request, pk):
     volunteer = Volunteer.objects.get(id=pk) 
     if volunteer.available == True:
@@ -788,6 +864,7 @@ def make_vol_available(request, pk):
         messages.info(request, 'Volunteer Made Available!')
         return redirect('volunteers')
 
+@login_required(login_url='login')
 def make_vol_unavailable(request, pk):
     volunteer = Volunteer.objects.get(id=pk) 
     if volunteer.available == False:

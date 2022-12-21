@@ -37,7 +37,10 @@
                     </td>
                     <td style="vertical-align: top;">
                       {% if request.user.is_authenticated %}
-                      <a href="{% url 'update-past-drive' drive.id %}"><button class="blue_button">Edit</button></a>
+                        {% if perms.employees.change_pastdrive %}
+                            <a href="{% url 'update-past-drive' drive.id %}"><button class="blue_button">Edit</button></a>
+                        {% endif %}
+
                       {% endif %}
                   </td>
               </tr>  

@@ -16,7 +16,9 @@
                 <a href="{% url 'ambulances' %}"><button class="pst_filter">See All</button></a>
             </td>
             <td width="70%">
+                {% if perms.employees.add_employee %}
                 <a href="{% url 'add-ambulance'%}"><button class="blue_button">+ Add Ambulance</button></a>
+                {% endif %}   
                 
                 {% for ambulance in ambulances %}
                 <table class="pst_container" style="width: 80%; margin-left: 5%;">
@@ -26,10 +28,14 @@
                             <div class="pst_txt">{{ ambulance.driver.username}}</div>
                         </td>
                         <td width=30%>
+                            {% if perms.employees.change_ambulance %}
                             <a href="{% url 'update-ambulance' ambulance.id %}"><button class="blue_button">Edit Driver</button></a>
+                            {% endif %}   
                         </td>
                         <td>
+                            {% if perms.employees.delete_ambulance %}
                             <a href="{% url 'remove-ambulance' ambulance.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                            {% endif %}   
                         </td>
                     </tr>
                     

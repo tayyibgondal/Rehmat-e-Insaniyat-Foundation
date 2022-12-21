@@ -1,0 +1,39 @@
+{% extends 'main.html' %} 
+{% block content %}
+
+<div class="pg_head_container">
+  <element class="pg_head">The Team</element>
+</div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+  <tr>
+      <td width=30% style="vertical-align: top; padding-right: 5%;">
+          <element class="subhead">Search</element>
+          <element class="pg_txt">{{ team_count }} team members.</element>
+          <form method="GET" action="{% url 'vis-team' %}">
+              <input class="usr_rect" type="search" name="q" placeholder="Search Team by role...">
+          </form>
+          
+          <element class="subhead">Useful for you</element>
+          <a href="{% url 'vis-team' %}"><button class="pst_filter">See All</button></a>
+      </td>
+      <td width="70%">
+          {% for employee in team %}
+          <table class="pst_container" style="width: 80%; margin-left: 5%;">
+              <tr width=100%>
+                  <td width=85%>
+                      <div class="pst_title">{{ employee.first_name }} {{ employee.last_name }}</div>
+                      <element class="pst_txt" style="padding-bottom: 0%;">{{ employee.role }}</element>
+                  </td>
+                  <td>
+                      <a href="{% url 'vis-profile' employee.id %}"><button class="blue_button">Explore</button></a>
+                  </td>
+              </tr>
+              
+          </table>
+          {% endfor %}
+      </td>
+  </tr>
+</table>
+
+{% endblock content %}

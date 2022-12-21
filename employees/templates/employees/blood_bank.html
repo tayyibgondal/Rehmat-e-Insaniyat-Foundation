@@ -16,7 +16,9 @@
             <a href="{% url 'blood-bank' %}"><button class="pst_filter">See All</button></a>
         </td>
         <td width="70%">
+            {% if perms.employees.add_inventory %}
             <a href="{% url 'add-to-blood-bank'%}"><button class="blue_button">+ Add Item</button></a>
+            {% endif %} 
             
             {% for item in items %}
             <table class="pst_container" style="width: 80%; margin-left: 5%;">
@@ -26,7 +28,9 @@
                         <div class="pst_txt">{{ item.count }} samples remaining.</div>
                     </td>
                     <td>
+                        {% if perms.employees.change_inventory %}
                         <a href="{% url 'deliver-blood-item' item.id %}"><button class="blue_button">Deliver</button></a>
+                        {% endif %} 
                     </td>
                 </tr>
                 

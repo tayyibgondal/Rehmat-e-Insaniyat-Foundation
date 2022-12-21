@@ -13,17 +13,17 @@
             <input type="text" id="email" name="email" class="usr_rect" placeholder="Enter Email"/>
             <input type="password" id="password" name="password" class="usr_rect" placeholder="Password"/>
         </div>
-        
-        <element class="usr_under_rect" id="lgnbtn">
-            Don't have an account? 
-            <a href="{% url 'register' %}">
-                <element class="pg_txt_hyper">
-                    Sign up
-                </element>
-            </a>.
-        </element>
-        <input type="submit" id="loginbtn" class="lgn_sgn_button" value="Submit"/>
+
+        <input type="submit" id="loginbtn" class="lgn_sgn_button" value="Login"/>
     </form>
+    <element class="usr_under_rect" id="lgnbtn">
+        Forgot Password? 
+        <a href="{% url 'password_reset' %}">
+            <element class="pg_txt_hyper">
+                Click Here
+            </element>
+        </a>.
+    </element>
 </center>
 
 {% endblock content %}

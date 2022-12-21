@@ -2,7 +2,11 @@ from django.shortcuts import render, redirect
 from employees.forms import (AskFAQForm, ContactUsForm, SubscriptionForm,
                              DonationForm, BloodDonationForm, VolunteerCreationForm)
 from django.contrib import messages
-from employees.models import Donor, BloodDonation
+from employees.models import (Donor, BloodDonation, Post, Topic,
+                              Department, Drive, PastDrive, Employee,
+                              FAQ)
+from django.db.models import Q
+
 
 def home(request):
     return render(request, 'visitor/home.html')
@@ -115,3 +119,116 @@ def become_volunteer(request):
         'form': form,
     }
     return render(request, 'employees/model_form.html', context)
+
+def team(request):
+    if request.GET.get('q') != None:
+        q = request.GET.get('q')  
+    else:
+        q = ''
+
+    team = Employee.objects.filter(
+        Q(role__icontains=q)
+        )
+    team_count = team.count()
+
+    context = {
+        'team': team,
+        'team_count': team_count,
+    }
+    return render(request, 'visitor/team.html', context)
+
+def faqs(request):
+    if request.GET.get('q') != None:
+        q = request.GET.get('q')  
+    else:
+        q = ''
+
+    faqs = FAQ.objects.filter(
+        Q(question__icontains=q)
+        )
+
+    context = {
+        'faqs': faqs,
+    }
+    return render(request, 'visitor/faqs.html', context)
+
+def past_drives(request):
+    if request.GET.get('q') != None:
+        q = request.GET.get('q')  
+    else:
+        q = ''
+
+    past_drives = PastDrive.objects.filter(
+        Q(name__icontains=q)
+        )
+
+    past_drive_count = past_drives.count()
+
+    context = {
+        'past_drives': past_drives,
+        'past_drive_count': past_drive_count,
+    }
+    return render(request, 'visitor/past_drives.html', context)
+
+def drives(request):
+    if request.GET.get('q') != None:
+        q = request.GET.get('q')  
+    else:
+        q = ''
+
+    drives = Drive.objects.filter(
+        Q(name__icontains=q)
+        )
+
+    drive_count = drives.count()
+
+    context = {
+        'drives': drives,
+        'drive_count': drive_count,
+    }
+    return render(request, 'visitor/drives.html', context)
+
+def departments(request):
+    if request.GET.get('q') != None:
+        q = request.GET.get('q')  
+    else:
+        q = ''
+    departments = Department.objects.filter(name__icontains=q)
+    context = {
+        'departments': departments,
+    }
+    return render(request, 'visitor/departments.html', context)
+
+def all_posts(request):
+    if request.GET.get('q') != None:
+        q = request.GET.get('q')  
+    else:
+        q = ''
+
+    posts = Post.objects.filter(
+        Q(title__name__icontains=q) |
+        Q(description__icontains=q)
+        )
+    post_count = posts.count()
+    topics = Topic.objects.all()
+    
+    context = {
+        'posts': posts,
+        'topics': topics,
+        'post_count': post_count,
+    }
+    return render(request, 'visitor/posts.html', context)
+
+def post(request, pk):
+    post = Post.objects.get(id=pk)
+    context = {
+        'post': post,
+    }
+    return render(request, 'visitor/post.html', context)
+
+def profile(request, pk):
+    employee = Employee.objects.get(id=pk)
+    context = {
+        'employee': employee,
+    }
+    return render(request, 'visitor/profile.html', context)

@@ -26,7 +26,9 @@
                     
                     {% if request.user.is_authenticated %}
                     <td>
+                        {% if perms.employees.delete_pitch %}
                         <a href="{% url 'remove-pitch' pitch.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                        {% endif %}
                     </td>
                     {% endif %}
                 </tr>
