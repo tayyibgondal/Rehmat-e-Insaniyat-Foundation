@@ -1,7 +1,7 @@
-from django.forms import widgets
 from django.shortcuts import render, redirect, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q, Sum
+from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -15,7 +15,10 @@ from .forms import (PostForm, DepartmentForm, BenificiaryForm, DriveForm, PastDr
                      BloodBankAdditionForm, FAQUpdationForm, CustomUserChangeForm, CustomUserCreationForm,
                      )
 from django.utils import timezone
+from .decorators import allowed_users
+from django.contrib.auth.decorators import permission_required
 
+@login_required(login_url='login')
 def home(request):
     donations_sum = Donation.objects.aggregate(Sum('amount')).get('amount__sum')
     items_sum = int(Inventory.objects.aggregate(Sum('item_count')).get('item_count__sum'))
@@ -35,6 +38,7 @@ def home(request):
     }
     return render(request, 'employees/home.html', context)
 
+@csrf_exempt
 def LoginView(request):
     # if user was already logged in
     if request.user.is_authenticated:
@@ -75,8 +79,13 @@ def register(request):
         if form.is_valid():
             user = form.save(commit=False)
 
-            user.username = user.username.lower()
+            user.role = user.role.lower()
             user.save()
+
+            user_group = Group.objects.get(name=user.role) 
+            print(user_group)
+            user.groups.add(user_group)
+            print('after adding group', user_group)
 
             return redirect('login')
 
@@ -91,6 +100,7 @@ def LogoutView(request):
         return redirect('visitor-home')
     return render(request, 'employees/logout.html')
 
+@allowed_users(allowed_roles=['admin', 'driver', 'manager'])
 def all_posts(request):
     if request.GET.get('q') != None:
         q = request.GET.get('q')  
@@ -98,7 +108,7 @@ def all_posts(request):
         q = ''
 
     posts = Post.objects.filter(
-        Q(title__name__icontains=q) |
+        Q(title_name_icontains=q) |
         Q(description__icontains=q)
         )
     post_count = posts.count()
@@ -110,7 +120,7 @@ def all_posts(request):
         'post_count': post_count,
     }
     return render(request, 'employees/posts.html', context)
-
+    
 def post(request, pk):
     post = Post.objects.get(id=pk)
     context = {
