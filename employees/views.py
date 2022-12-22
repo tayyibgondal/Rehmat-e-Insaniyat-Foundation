@@ -9,17 +9,18 @@ from django.db.models import Q
 from .models import (Post, Topic, Department, Benificiary, Donation,
                      BloodDonation, Donor, Subscriber, Drive, PastDrive,
                      Ambulance, Inventory, Dispensary, BloodBank, FAQ, Pitch,
-                     Employee, Volunteer)
+                     Employee, Volunteer, Topic)
 from .forms import (PostForm, DepartmentForm, BenificiaryForm, DriveForm, PastDriveForm,
                      AmbulanceAdditionForm, AmbulanceUpdationForm, InventoryForm, DispensaryForm,
                      BloodBankAdditionForm, FAQUpdationForm, CustomUserChangeForm, CustomUserCreationForm,
+                     TopicForm 
                      )
 from django.utils import timezone
 
 @login_required(login_url='login')
 def home(request):
     donations_sum = Donation.objects.aggregate(Sum('amount')).get('amount__sum')
-    items_sum = int(Inventory.objects.aggregate(Sum('item_count')).get('item_count__sum'))
+    items_sum = int(Inventory.objects.aggregate(Sum('item_count')).get('item_count__sum')) if Inventory.objects.aggregate(Sum('item_count')).get('item_count__sum') else None
     volunteers_sum = Volunteer.objects.all().count()
 
     recent_donations = Donation.objects.all().order_by('-id')[:3]
@@ -92,6 +93,23 @@ def register(request):
         'form': form,
     }
     return render(request, 'employees/register.html', context)
+
+@login_required(login_url='login')
+def fire_employee(request, pk):
+    employee = Employee.objects.get(id=pk)
+
+    emp_is_sup = employee.is_superuser
+    firer_is_not_sup = request.user.is_superuser == True
+
+    if ((emp_is_sup and firer_is_not_sup) or 
+        request.user == employee):
+        return render(request, 'forbidden_403.html')
+
+    if request.method == "POST":
+        employee.delete()
+        return redirect('team')
+
+    return render(request, 'employees/delete.html', {'obj': employee})
 
 @login_required(login_url='login')
 def LogoutView(request):
@@ -176,6 +194,18 @@ def delete_post(request, pk):
         return redirect('all-posts')
 
     return render(request, 'employees/delete.html', {'obj': post})
+
+def add_topic(request):
+    form = TopicForm()
+    if request.method == 'POST':
+        form = TopicForm(request.POST)
+        if(form.is_valid()):
+            form.save()
+            return redirect('all-posts')
+    context = {
+        'form': form,
+    }
+    return render(request, 'employees/model_form.html', context)
 
 @login_required(login_url='login')
 def departments(request):
@@ -875,4 +905,9 @@ def make_vol_unavailable(request, pk):
         volunteer.save()
         messages.info(request, 'Volunteer Freed!')
         return redirect('volunteers')
+
+def view_event_log(request):
+    pass
+
+        
         

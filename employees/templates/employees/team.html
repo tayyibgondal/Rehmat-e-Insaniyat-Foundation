@@ -27,6 +27,9 @@
                   </td>
                   <td>
                       <a href="{% url 'profile' employee.id %}"><button class="blue_button">Explore</button></a>
+                      {% if perms.employees.delete_employee %}
+                        <a href="{% url 'fire-employee' employee.id %}"><button class="blue_button">Fire</button></a>
+                      {% endif %}
                   </td>
               </tr>
               

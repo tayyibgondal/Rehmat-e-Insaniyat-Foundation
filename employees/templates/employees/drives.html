@@ -45,8 +45,8 @@
                     <element class="pst_txt" style="display: block; font-size: 18px; margin-top: 0%;">{{ drive.start_date }}</element>
                 </td>
                 <td style="vertical-align: top;">
-                    <element class="pst_funds" id="pst_funds">Req: PKR {{drive.required_funds}}</element>
-                    <element class="pst_funds" id="pst_funds">Coll: PKR {{drive.collected_funds}}</element>
+                    <element class="pst_funds" id="pst_funds">PKR {{drive.required_funds}}</element>
+                    <element class="pst_txt" id="pst_txt">Collectd PKR {{drive.collected_funds}}</element>
                     {% if request.user.is_authenticated %}
                       {% if perms.employees.change_drive %}
                         <a href="{% url 'update-drive' drive.id %}"><button class="blue_button">Edit</button></a>

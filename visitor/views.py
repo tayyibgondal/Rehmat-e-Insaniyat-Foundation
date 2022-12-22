@@ -22,6 +22,12 @@ def subscribe(request):
             messages.success(request, 'Subscribed Successfully!') 
             form.save()           
             return redirect('visitor-home')
+        else:
+            messages.error(request, 'Enter correct data in fields!') 
+            context = {
+                'form': form,
+            }
+            return render(request, 'employees/model_form.html', context)
     context = {
         'form': form,
     }
@@ -32,8 +38,9 @@ def ask_question(request):
     if request.method == 'POST':
         form = AskFAQForm(request.POST)
         if(form.is_valid()):
+            messages.success(request, 'Question submitted Successfully!') 
             form.save()
-            return redirect('faqs')
+            return redirect('vis-faqs')
     context = {
         'form': form,
     }
@@ -57,6 +64,7 @@ def donate(request):
     if request.method == 'POST':
         form = DonationForm(request.POST)
         if(form.is_valid()):
+            messages.success(request, 'Donation Successful!')  
             donation = form.save(commit=False)
             # donor-related information
             first_name = form.cleaned_data['first_name']
@@ -70,7 +78,6 @@ def donate(request):
                                      last_name=last_name, 
                                      email=email, 
                                      phone_no=phone_no)
-            messages.success(request, 'Donation Successful!')  
             donation.donor = donor  
             donation.save()        
             return redirect('visitor-home')
@@ -84,6 +91,7 @@ def donate_blood(request):
     if request.method == 'POST':
         form = BloodDonationForm(request.POST)
         if(form.is_valid()):
+            messages.success(request, 'Donation Successful!')  
             # donor-related information
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
@@ -98,7 +106,6 @@ def donate_blood(request):
                                      last_name=last_name, 
                                      email=email, 
                                      phone_no=phone_no)
-            messages.success(request, 'Donation Successful!')  
             # finally create blood donation record
             BloodDonation.objects.create(donor=donor, bloodtype=bloodtype)
             return redirect('visitor-home')

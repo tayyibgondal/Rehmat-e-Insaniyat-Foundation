@@ -1,10 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from django.forms import ModelForm, widgets
+from django.forms import ModelForm
 from .models import (Post, Department, Benificiary, Drive, 
                      PastDrive, Ambulance, Inventory, BloodBank,
                      Dispensary, FAQ, Pitch, Subscriber, Donation,
-                     Employee, Volunteer)
+                     Employee, Volunteer, Topic)
 from django.db.models import Q
 
 class CustomUserCreationForm(UserCreationForm):
@@ -104,6 +104,12 @@ class FAQUpdationForm(ModelForm):
 
     class Meta:
         model = FAQ
+        fields = '__all__'
+
+class TopicForm(ModelForm):
+
+    class Meta:
+        model = Topic
         fields = '__all__'
 
 class AskFAQForm(ModelForm):

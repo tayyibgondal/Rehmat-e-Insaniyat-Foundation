@@ -79,12 +79,14 @@
 </div>
 </h3>
 
-{% if messages %}
+
+<div style="background-color: greenyellow;">
+    {% if messages %}
     {% for message in messages %}
         {{ message }}
     {% endfor %} 
 {% endif %}
-
+</div>
 
 {% else %}
 <div class="main_hd">
@@ -129,10 +131,12 @@
     </center>
 </div>
 
+<div style="background-color: greenyellow;">
 {% if messages %}
-{% for message in messages %}
-{{ message }}
-{% endfor %} 
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %} 
 {% endif %}
+</div>
 
 {% endif %}

@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from .managers import CustomUserManager
-from django.db.models.signals import post_save, post_delete
 
 class Employee(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=150)
@@ -32,7 +31,7 @@ class Volunteer(models.Model):
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     email = models.EmailField(null=True, blank=True)
-    phone_no = models.IntegerField()
+    phone_no = models.CharField(max_length=30, unique=True)
     available = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
 
@@ -46,9 +45,9 @@ class Topic(models.Model):
         return self.name
 
 class Post(models.Model):
-    author = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    author = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True)
     title = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
-    description = models.TextField(null=True, blank=True)
+    description = models.TextField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -59,7 +58,7 @@ class Post(models.Model):
         return self.title.name
 
 class Department(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     description = models.TextField(null=True, blank=True)
 
     def __str__(self):
@@ -79,7 +78,7 @@ class Donor(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField()
-    phone_no = models.CharField(max_length=30)
+    phone_no = models.CharField(max_length=30, unique=True) 
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
@@ -109,6 +108,7 @@ class Donation(models.Model):
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
     drive = models.ForeignKey(Drive, on_delete=models.SET_NULL, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
+    used = models.FloatField(default=0)
 
     def __str__(self):
         return str(self.amount) + ' from ' + self.donor.first_name
@@ -124,7 +124,7 @@ class BloodDonation(models.Model):
 class Subscriber(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     phone_no = models.CharField(max_length=30)
     date = models.DateTimeField(auto_now_add=True)
 
@@ -132,7 +132,7 @@ class Subscriber(models.Model):
         return self.first_name + ' ' + self.last_name
 
 class Ambulance(models.Model):
-    plate_no = models.CharField(max_length=100)
+    plate_no = models.CharField(max_length=100, unique=True)
     driver = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
@@ -163,13 +163,14 @@ class Ambulance(models.Model):
 class Inventory(models.Model):
     item_name = models.CharField(max_length=100)
     item_count = models.IntegerField()
+    price_per_item = models.FloatField()
     donation = models.ForeignKey(Donation, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.item_name
 
 class Dispensary(models.Model):
-    medicine = models.CharField(max_length=100)
+    medicine = models.CharField(max_length=100, unique=True)
     count = models.IntegerField()
     category = models.CharField(max_length=100)
     expiry = models.DateTimeField()
@@ -178,7 +179,7 @@ class Dispensary(models.Model):
         return self.medicine
 
 class BloodBank(models.Model):
-    bloodType = models.CharField(max_length=10)
+    bloodType = models.CharField(max_length=10, unique=True)
     count = models.IntegerField()
 
     def __str__(self):
@@ -194,7 +195,7 @@ class FAQ(models.Model):
 class Pitch(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(null=True, blank=True)
-    phone_no = models.IntegerField()
+    phone_no = models.CharField(max_length=30)
 
     def __str__(self):
         return 'Pitch by ' + self.name

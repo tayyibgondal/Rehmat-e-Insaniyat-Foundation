@@ -26,6 +26,7 @@ urlpatterns = [
     path('create-post/', views.create_post, name='create-post'),
     path('update-post/<str:pk>/', views.update_post, name='update-post'),
     path('delete-post/<str:pk>/', views.delete_post, name='delete-post'),
+    path('add-topic/', views.add_topic, name='add-topic'),
     
     path('departments/', views.departments, name='departments'),  # list of departments(by clicking on
     # each department, we go to a page which shows benificiaries of that particular department)
@@ -82,8 +83,10 @@ urlpatterns = [
     path('remove-pitch/<str:pk>/', views.remove_pitch, name='remove-pitch'),
 
     path('team/', views.team, name='team'),
-    path('profile/<str:pk>', views.profile, name='profile'),
+    path('fire-employee/<str:pk>/', views.fire_employee, name='fire-employee'),
+    path('profile/<str:pk>/', views.profile, name='profile'),
     path('edit-profile/<str:pk>/', views.edit_personal_profile, name='edit-profile'),
+    path('view-event-log/', views.view_event_log, name='view-event-log'),
 
     path('volunteers/', views.volunteers, name='volunteers'),
     path('volunteers/remove-volunteer/<str:pk>/', views.remove_volunteer, name='remove-volunteer'),

@@ -60,6 +60,9 @@
         {% elif request.resolver_match.url_name == 'subscribe' %} 
             <element class="pg_head">Subscribe to the newsletter</element>
             <element class="pg_txt">Get to know what drives are starting when and stay up to date with the current states of welfare drives.</element> 
+        {% elif request.resolver_match.url_name == 'add-topic' %} 
+            <element class="pg_head">Topic</element>
+            <element class="pg_txt">Add a topic.</element>
         {% endif %}
     </div>
 
