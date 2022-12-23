@@ -27,7 +27,7 @@
     
     <button onclick="topFunction()" id="myBtn" title="Go to top">⇡</button>
 </div>
-<div class="main_hd" id="pg_subheader" style="z-index: 1; background-color: #01386C; padding: 0.5%;">
+<div class="main_hd" id="pg_subheader" style="z-index: 10; background-color: #01386C; padding: 0.5%;">
     <center>
         <a href="{% url 'all-posts' %}"><button class="feature">News & Blogs</button></a>
         <a href="{% url 'faqs' %}"><button class="feature">FAQs</button></a>
@@ -83,13 +83,13 @@
 <div style="background-color: greenyellow;">
     {% if messages %}
     {% for message in messages %}
-        {{ message }}
+        <div class="{{message.type}}"> {{ message.tags }} </div>
     {% endfor %} 
 {% endif %}
 </div>
 
 {% else %}
-<div class="main_hd">
+<div class="main_hd" style="z-index: 1;">
     <a href="{% url 'visitor-home' %}"><button class="wstitle" style="font-family: 'Aldhabi Regular'; vertical-align: middle; margin-bottom: -1%; margin-top: -1%;">رحمت انسانیت</button></a>
     
     <a href="{% url 'login' %}">
@@ -131,12 +131,10 @@
     </center>
 </div>
 
-<div style="background-color: greenyellow;">
 {% if messages %}
     {% for message in messages %}
-        {{ message }}
+        <div class = "success" style="margin-bottom: -75px;"> {{ message }} </div>
     {% endfor %} 
 {% endif %}
-</div>
 
 {% endif %}

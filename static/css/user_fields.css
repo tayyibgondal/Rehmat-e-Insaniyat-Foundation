@@ -121,6 +121,24 @@
   text-align: left;
 }
 
+.info {
+  width: 100%;
+  margin-bottom: 1%;
+  padding: 2%;
+  padding-left:3;
+  padding-right: 3%;
+  font-size: 14px;
+  border-radius: 15px;
+  font-family: 'Inter Light';
+  border: 0px;
+  border-style: solid;
+  border-color: rgb(255, 166, 0);
+  background: rgba(255, 208, 0, 0.25);
+  color: rgb(182, 164, 0);
+  text-align: left;
+}
+
+
 .caution {
   width: 100%;
   margin-bottom: 1%;
@@ -153,5 +171,11 @@
 
   40%, 60% {
     transform: translate3d(4px, 0, 0);
+  }
+}
+
+@keyframes jiggle {
+  0% {
+    transform: translate3d(-500px, 0, 0);
   }
 }
