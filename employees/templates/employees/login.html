@@ -8,13 +8,13 @@
         <div class="pg_head_container_center" style="margin-top: 12%;">
             <element class="pg_head">Login</element><br>
             {% if msg != 'None' %}
-            <div class="error" id="login_error_msg"> <element style="font-weight: 1000; font-size: 20px;">⨯    </element> {{ msg }}</div>
+            <div class="error" id="login_error_msg"> <element style="font-weight: 1000;">✕    </element> {{ msg }}</div>
             {% endif %}
             <input type="text" id="email" name="email" class="usr_rect" placeholder="Enter Email"/>
             <input type="password" id="password" name="password" class="usr_rect" placeholder="Password"/>
         </div>
 
-        <input type="submit" id="loginbtn" class="lgn_sgn_button" value="Login"/>
+        <input type="submit" id="loginbtn" style="margin-top: 5%;" class="lgn_sgn_button" value="Login"/>
     </form>
     <element class="usr_under_rect" id="lgnbtn">
         Forgot Password? 

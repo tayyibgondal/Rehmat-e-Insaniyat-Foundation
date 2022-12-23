@@ -57,7 +57,9 @@
     </div>
 
     <element class="container">
-        <img class="img" style=" transform: translate(0,0); animation: jiggle 30s infinite alternate both; backface-visibility: hidden; perspective: 1000px; width: max-content; overflow: hidden;" src="{% static 'images/slide1.jpg' %}">
+        <div style="overflow-x: hidden;">
+            <img class="img" style=" transform: translate(0,0); animation: jiggle 30s infinite alternate both; backface-visibility: hidden; perspective: 1000px; width: max-content; overflow: hidden;" src="{% static 'images/slide1.jpg' %}">
+        </div>
         <div class="title_desc_container" style="top: 5%;" data-aos="fade-up" data-aos-duration=1000>
             <element class="title">Every blood type counts.</element>
             <element class="desc">Your blood is life for not only you, but those also who suffer blood disease.</element>

@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 {% block content %}
 
-<a href="{% url 'vis-blogs' %}"><button class="blue_button">Go back</button></a>
+<a href="{% url 'all-posts' %}"><button class="blue_button">Go back</button></a>
 <div class="pg_head_container">
     <element class="pg_head">Post by {{ post.author.username }}.</element>
     <element class="pg_txt">Last updated on {{ post.created }}.</element>

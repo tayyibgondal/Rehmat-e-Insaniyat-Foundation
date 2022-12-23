@@ -27,7 +27,7 @@
                     <a href="{% url 'create-post'%}"><button class="blue_button">+ Create Post</button></a>
                 {% endif %}
                 {% if perms.employees.add_topic %}
-                    <a href="{% url 'add-topic' %}"><button class="blue_button">Add Topic</button></a>
+                    <a href="{% url 'add-topic' %}"><button class="blue_button">+ Add Topic</button></a>
                 {% endif %}  
             {% endif %}
             
@@ -35,8 +35,8 @@
             <table class="pst_container" style="width: 80%; margin-left: 5%;">
                 <tr width=100%>
                     <td width=85%>
-                        <div class="pst_title">{{ post.author.username }}</div>
-                        <element class="pst_txt" style="padding-bottom: 0%;">{{post.title}}</element>
+                        <div class="pst_title">{{post.title}}</div>
+                        <element class="pst_txt" style="padding-bottom: 0%;">{{ post.author.username }}</element>
                         <element class="pst_txt" style="display: block; font-size: 18px; margin-top: 0%;">{{ post.created }}</element>
                     </td>
                     <td>

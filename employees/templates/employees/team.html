@@ -21,14 +21,16 @@
           {% for employee in team %}
           <table class="pst_container" style="width: 80%; margin-left: 5%;">
               <tr width=100%>
-                  <td width=85%>
+                  <td width=80%>
                       <div class="pst_title">{{ employee.first_name }} {{ employee.last_name }}</div>
                       <element class="pst_txt" style="padding-bottom: 0%;">{{ employee.role }}</element>
                   </td>
                   <td>
-                      <a href="{% url 'profile' employee.id %}"><button class="blue_button">Explore</button></a>
+                      <a href="{% url 'profile' employee.id %}"><button class="blue_button" style="display: inline-block;">Explore</button></a>
+                    </td>
+                    <td>
                       {% if perms.employees.delete_employee %}
-                        <a href="{% url 'fire-employee' employee.id %}"><button class="blue_button">Fire</button></a>
+                        <a href="{% url 'fire-employee' employee.id %}"><button class="blue_button" style="display: inline-block;">Fire</button></a>
                       {% endif %}
                   </td>
               </tr>
