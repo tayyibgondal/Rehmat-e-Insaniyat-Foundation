@@ -7,7 +7,13 @@
     <img src="{% static 'images/logo1.png' %}" style="opacity: 50%; margin-left: 80%; overflow: hidden; position: absolute;" width="300px">
     <table class="foottable" width = 95% style="opacity: 100%;">
         <tr>
-            <td colspan="4" style="padding-bottom: 1%;"><element class="foothead">rehmateinsaniyat@gmail.com</element></td>
+            <td colspan="2" style="padding-bottom: 1%;"><element class="foothead">rehmateinsaniyat@gmail.com</element></td>
+            <td colspan="2" style="padding-bottom: 1%;">
+                <a href="{% url 'login' %}">
+                    <button class="loginbtn" style="float: none;">Employee Login</button>
+                </a>
+                <a href="{% url 'subscribe' %}"><button class="goldbtn" style="float: none;">Subscribe</button></a>
+            </td>
         </tr>
         <tr>
             <td width=25% style="vertical-align: top;">
