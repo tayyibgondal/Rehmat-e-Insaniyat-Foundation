@@ -66,15 +66,24 @@
     font-weight: bolder;
     font-size: 30px;
     padding: 2%;
-    box-shadow: 0px 1px 10px 0px black;
-    /* transition-duration: 1s; */
-
+    transition-duration: 0.5s;
+    
     /* animations */
     animation-name: fade-in;
     animation-duration: 1s;
     animation-iteration-count: 1;
     animation-direction: normal;
     animation-timing-function: cubic-bezier(0, 0.82, 0.165, 1);
+}
+
+.transparent_bg{
+    background: linear-gradient(360deg, #ffffff00, #00000081);
+    margin-bottom: -100px;
+}
+
+.main_hd_solid_bg{
+    background-color: #011E4D;
+    box-shadow: 0px 1px 10px 0px black;
 }
 
 .wstitle{
@@ -105,7 +114,7 @@
 }
 
 .goldbtn{
-    border-radius: 50px;
+    border-radius: 5px;
     font-family: "Inter SemiBold";
     width: fit-content;
     padding: 10px;
@@ -120,7 +129,7 @@
 }
 
 .loginbtn{
-    border-radius: 50px;
+    border-radius: 5px;
     font-family: "Inter SemiBold";
     width: fit-content;
     padding: 10px;

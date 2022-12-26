@@ -2,10 +2,69 @@
 {%load static%}
 
 {% block content %}
-
+<element id = "main_home"></element>
 <body bgcolor="black">
+    <div class="slideshow-container" style=" overflow: hidden;">
+        <div class="mySlides fade" style="background-color: black;">
+            <img class="sldshwimg" src="{% static 'images/blood1.png' %}" style="width:100%; opacity: 50%; z-index: -1;">
+            <div class="text">
+                <element class="title">Every blood type counts.</element>
+                <element class="desc">Your blood is life for not only you, but those also who suffer blood disease.</element>
+                <a href="{% url 'vis-drives' %}"> <button class="blue_button">How can I help?</button></a>
+            </div>
+        </div>
+
+        <div class="mySlides fade" style="background-color: black;">
+            <img class="sldshwimg" src="{% static 'images/feature1.jpg' %}" style="width:100%; opacity: 50%; z-index: -1;">
+            <div class="text">
+                <element class="title">Ambulance Service at Miani</element>
+                <element class="desc">
+                    Rehmat-e-Insaniat Foundation is working in 2 provinces currently without any discrimination. 
+                    The foundation was already running 2 ambulances but we had routine calls for the provision of 
+                    ambulance from the area of Miani.
+                </element>
+            </div>
+        </div>
+        
+        <div class="mySlides fade" style="background-color: black;">
+          <img class="sldshwimg" src="{% static 'images/feature2.jpg' %}" style="width:100%; opacity: 50%; z-index: -1;">
+          <div class="text">
+            <element class="title">Monthly Grocery Packages</element>
+            <element class="desc">
+                The increasing inflation has affected the needy in the worse. 
+                It is too much difficult for the poor to make the both ends meet 
+                in these circumstances.
+            </element>
+        </div>
+        </div>
+        
+        <div class="mySlides fade" style="background-color: black;">
+            <img class="sldshwimg" src="{% static 'images/feature3.jpg' %}" style="width:100%; opacity: 50%; z-index: -1;">
+            <div class="text">
+                <element class="title">The 2018 Earthquake Drive.</element>
+                <element class="desc">
+                    An earthquake that shook the entire country. Rehmat-e-Insaniat
+                    was busy in continuous supply of resources to the most dangerous 
+                    areas during the days.
+                </element>
+            </div>
+        </div>
+
+        
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+        
+        <div style="text-align:center; margin-top: 100%;">
+            <span class="dot" onclick="currentSlide(1)"></span> 
+            <span class="dot" onclick="currentSlide(2)"></span> 
+            <span class="dot" onclick="currentSlide(3)"></span> 
+            <span class="dot" onclick="currentSlide(4)"></span> 
+        </div>
+    </div>
+        
+
+
     <element class="container">
-        <img class="img" src="{% static 'images/blood1.png' %}" style="width:100%; height: 650px;">
         <div class="title_desc_container" style="margin-top: 60%;" data-aos="fade-up" data-aos-duration=1000>
             <element class="title">Provide a Home</element>
             <element class="desc">Provide shelter to those who are shelterless.</element>
@@ -60,10 +119,7 @@
         <div style="overflow-x: hidden;">
             <img class="img" style=" height: 650px; transform: translate(0,0); animation: jiggle 30s infinite alternate both; backface-visibility: hidden; perspective: 1000px; width: max-content; overflow: hidden;" src="{% static 'images/slide1.jpg' %}">
         </div>
-        <div class="title_desc_container" style="top: 5%;" data-aos="fade-up" data-aos-duration=1000>
-            <element class="title">Every blood type counts.</element>
-            <element class="desc">Your blood is life for not only you, but those also who suffer blood disease.</element>
-            <a href="{% url 'vis-drives' %}"> <button class="blue_button">How can I help?</button></a>
+        <div class="title_desc_container" style="top: 20%;" data-aos="fade-up" data-aos-duration=1000>
         </div>
     </element>
 

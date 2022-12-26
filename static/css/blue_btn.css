@@ -2,7 +2,7 @@
     position: relative;
     margin-top: 2%;
     left: 5%;
-    border-radius: 50px;
+    border-radius: 5px;
     font-family: "Inter SemiBold";
     width: fit-content;
     padding: 10px;
@@ -21,7 +21,7 @@
 
 .lgn_sgn_button{
     position: relative;
-    border-radius: 50px;
+    border-radius: 5px;
     font-family: "Inter SemiBold";
     width: fit-content;
     padding: 10px;
