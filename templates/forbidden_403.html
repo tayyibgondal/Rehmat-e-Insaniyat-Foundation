@@ -1,0 +1,14 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/blue_btn.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/page_header.css' %}">
+    
+<center>
+    <div class="pg_head_container" style="margin-left: 0%; margin-top: 15%;">
+        <element class="pg_head" style="color: #f30505; font-weight: 1000;">✕</element>
+        <element class="pg_head" style="color: #f30505;">403, oops!</element>
+        <element class="pg_txt">It seems that the action that you tried to commit was not allowed by the administrator. Don't worry, just head back and everything will be fine.</element>
+        <a href="{{ request.META.HTTP_REFERER }}"><button class="blue_button" style="background-color: #f30505; margin-left: -5%;">Got it!</button></a>
+    </div>        
+</center>

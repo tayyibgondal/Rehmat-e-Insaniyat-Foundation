@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="pg_head_container">
+    <element class="pg_head">Beneficiaries</element>
+</div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <element class="pg_txt">{{benificiary_count}} results.</element>
+            <form method="GET" action="{% url 'benificiaries' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search Beneficiaries...">
+            </form>
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'benificiaries' %}"><button class="pst_filter">See All</button></a>
+        </td>
+        <td width="70%">
+            {% if perms.employees.add_benificiary %}
+            <a href="{% url 'create-benificiary'%}"><button class="blue_button">+ Add Beneficiary</button></a>
+            {% endif %} 
+
+            {% for benificiary in benificiaries %}
+            <table class="pst_container" style="width: 80%; margin-left: 5%;">
+                <tr>
+                    <td width=60%>
+                        <div class="pst_txt">{{ benificiary.department.name }}</div>
+                        <div class="pst_title">{{ benificiary.first_name }} {{ benificiary.last_name }}</div>
+                        <div class="pst_txt">{{ benificiary.age }}, {{ benificiary.gender }}</div>
+                    </td>
+                    <td width=30%>
+                        {% if perms.employees.change_benificiary %}
+                        <a href="{% url 'update-benificiary' benificiary.id %}"><button class="blue_button">Edit Details</button></a>
+                        {% endif %}   
+                    </td>
+                    <td>
+                        {% if perms.employees.delete_benificiary %}
+                        <a href="{% url 'remove-benificiary' benificiary.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                        {% endif %}   
+                    </td>
+                </tr>
+                
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+
+{% endblock content %}

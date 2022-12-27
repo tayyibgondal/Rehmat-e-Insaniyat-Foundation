@@ -1,0 +1,54 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load mathfilters %}
+
+<div class="pg_head_container">
+    <element class="pg_head">Past Drives</element>
+</div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <element class="pg_txt"> {{ past_drive_count }} closed drives.</element>
+            <form method="GET" action="{% url 'past-drives' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search Closed Drives...">
+            </form>
+            
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'past-drives' %}"><button class="pst_filter">See All</button></a>
+          </td>
+          <td width="70%">
+            
+            {% for drive in past_drives %}
+            <table class="pst_container" style="width: 80%; margin-left: 5%;">
+              <tr>
+                  <td width="55%">
+                      <element class="pst_title" id="pst_title">
+                        {{ drive.name }}
+                      </element>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <element class="pst_txt" id="pst_txt">{{ drive.description }}</element>
+                      <element class="pst_txt">Started {{ drive.start_date }}</element>
+                      <element class="pst_txt">Ended {{ drive.end_date }}</element>
+                    </td>
+                    <td style="vertical-align: top;">
+                      {% if request.user.is_authenticated %}
+                        {% if perms.employees.change_pastdrive %}
+                            <a href="{% url 'update-past-drive' drive.id %}"><button class="blue_button">Edit</button></a>
+                        {% endif %}
+
+                      {% endif %}
+                  </td>
+              </tr>  
+                
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+  </table>
+
+{% endblock content %}

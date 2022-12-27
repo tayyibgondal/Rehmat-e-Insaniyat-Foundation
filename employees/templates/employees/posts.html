@@ -1,0 +1,66 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="pg_head_container">
+    <element class="pg_head">News & Posts</element>
+</div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <element class="pg_txt">{{post_count}} posts available.</element>
+            <form method="GET" action="{% url 'all-posts' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search Posts...">
+            </form>
+            
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'all-posts' %}"><button class="pst_filter">See All</button></a>
+            {% for topic in topics %}
+            <a href="{% url 'all-posts' %}?q={{topic.name}}"><div class="pst_filter">{{ topic.name }}</div></a>
+            {% endfor %}
+        </td>
+        <td width="70%">
+            {% if request.user.is_authenticated %}
+                {% if perms.employees.add_post %}
+                    <a href="{% url 'create-post'%}"><button class="blue_button">+ Create Post</button></a>
+                {% endif %}
+                {% if perms.employees.add_topic %}
+                    <a href="{% url 'add-topic' %}"><button class="blue_button">+ Add Topic</button></a>
+                {% endif %}  
+            {% endif %}
+            
+            {% for post in posts %}
+            <table class="pst_container" style="width: 80%; margin-left: 5%;">
+                <tr width=100%>
+                    <td width=85%>
+                        <div class="pst_title">{{post.title}}</div>
+                        <element class="pst_txt" style="padding-bottom: 0%;">{{ post.author.username }}</element>
+                        <element class="pst_txt" style="display: block; font-size: 18px; margin-top: 0%;">{{ post.created }}</element>
+                    </td>
+                    <td>
+                        <a href="{% url 'post' post.id %}"><button class="blue_button">Read</button></a>
+                    </td>
+                    {% if request.user == post.author or perms.employees.change_post or perms.employees.delete_post %}
+                    <td>
+                        {% if perms.employees.change_post %}
+                            <a href="{% url 'update-post' post.id %}"><button class="blue_button">Edit</button></a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if perms.employees.delete_post %}
+                            <a href="{% url 'delete-post' post.id %}"><button class="blue_button" style="background-color: #f30505;">Delete</button></a>
+                        {% endif %}
+                    </td>
+                    {% endif %}
+                </tr>
+                
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+
+
+{% endblock content %}

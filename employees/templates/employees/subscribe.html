@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<center>
+<div class="pg_head_container">
+    <element class="pg_head" style="margin-left: -10%;">Please fill out this form.</element>
+    
+    <!-- <element class="pg_txt" style="margin-left: -10%;">
+        Make a change by donating to those in need of it.
+    </element> -->
+    
+</div>
+
+
+
+<div style="margin-top: -10%;">
+    <table width=50% border="0">
+        <div class="pg_head_container_center" style="margin-top: 12%;">
+            <div class="form__group form__group">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <tr>
+                    <td>
+                        <div class="form__group pg_txt">
+                            <label style="margin-bottom: -5%; font-size: 18px; padding-right: 5%;">{{field.label}}</label>
+                        </div>
+                    </td>
+                    <td width=80%>
+                        <div class="form__group input" style="margin-bottom: -1%;">
+                        {{field}}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </div>
+        </div>
+    </table>
+    <input type="submit" style="margin-left: -5%;" class="blue_button" value="Submit"/>
+</form>
+</div>
+</center>
+
+{% endblock content %}

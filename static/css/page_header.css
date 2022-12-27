@@ -1,0 +1,47 @@
+.pg_head_container{
+    width: 30%;
+    margin-left: 5%;
+    font-size: 20px;
+    position: relative;
+    vertical-align: middle;
+}
+
+.pg_head_container_center{
+    width: 30%;
+    margin-left: 0%;
+    font-size: 20px;
+    position: relative;
+    vertical-align: middle;
+}
+
+.pg_head {
+    margin-top: 10%;
+    display: block;
+    color: #058DF3;
+    font-family: 'Inter Black';
+    font-size: 48px;
+}
+
+.pg_txt {
+    margin-top: 1%;
+    margin-bottom: 5%;
+    color: black;
+    display: block;
+    font-family: 'Inter';
+}
+
+.pg_txt_hyper {
+    color: #058DF3;
+}
+
+.pg_bg{
+    width: 40%;
+    justify-content: left;
+    opacity: 100%;
+    z-index: -1;
+    float: right;
+    position: relative;
+    line-height: 500px;
+    align-items: left;
+    overflow: hidden;
+}

@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="pg_head_container">
+    <element class="pg_head">Inventory</element>
+</div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <form method="GET" action="{% url 'inventory' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search Inventory...">
+            </form>
+            
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'inventory' %}"><button class="pst_filter">See All</button></a>
+          </td>
+          <td width="70%">
+            {% if request.user.is_authenticated %}
+              {% if perms.employees.add_inventory %}
+                i<a href="{% url 'add-to-inventory'%}"><button class="blue_button">+ Add Purchase</button></a>
+              {% endif %}
+
+            {% endif %}
+            
+            {% for item in items %}
+            <table class="pst_container" style="width: 80%; margin-left: 5%;">
+              <tr>
+                  <td width="75%">
+                      <element class="pst_title" id="pst_title">
+                        {{ item.item_name }}
+                      </element>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <element class="pst_txt" id="pst_txt">{{ item.item_count }} in stock.</element>
+                      <element class="pst_txt">Donated by {{ item.donation.donor.first_name }} {{ item.donation.donor.last_name }}</element>
+                    </td>
+                    {% if request.user.is_authenticated %}
+                    <td style="vertical-align: top;">
+                      {% if perms.employees.change_inventory %}
+                      <a href="{% url 'update-item' item.id %}"><button class="blue_button">Edit</button></a>
+                      {% endif %}
+                    </td>
+                    <td style="vertical-align: top;">
+                      {% if perms.employees.change_inventory %}
+                      <a href="{% url 'deliver-item' item.id %}"><button class="blue_button">Deliver</button></a>
+                      {% endif %}
+                    </td>
+                    {% endif %}
+              </tr>  
+                
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+  </table>
+
+{% endblock content %}

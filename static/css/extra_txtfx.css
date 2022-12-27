@@ -1,0 +1,42 @@
+.subhead{
+    position: relative;
+    color: #058cf393;
+    top: 0%;
+    padding-bottom: 1%;
+    font-family: "Inter Black";
+    display: block;
+    opacity: 100%;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+.subhead_thinned{
+    position: relative;
+    color: #000000;
+    top: 0%;
+    padding-bottom: 1%;
+    font-family: "Inter Regular";
+    display: block;
+    opacity: 100%;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+.question{
+    position: relative;
+    color: #058cf393;
+    top: 0%;
+    font-family: "Inter Black";
+    display: block;
+    opacity: 100%;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+.answer {
+    margin-top: 0.5%;
+    margin-bottom: 5%;
+    color: black;
+    display: block;
+    font-family: 'Inter';
+}

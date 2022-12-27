@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+{% block content %} 
+
+
+<div>
+    <center>
+        <div class="pg_head_container" style="width: 50%;">
+            <element class="pg_head" style="margin-left: -10%; margin-bottom: 5%;">Register new employee</element>
+            
+            <element class="caution" style="margin-left: -10%;">
+                <element style="font-weight: 1000;">ἱ   </element> You can fill out this form only if you are officially permitted to do so.
+            </element>
+            
+        </div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table style = "margin-top: 5%;">
+        {% for field in form %}
+        <tr>
+            <td>
+                <div class="form__group pg_txt">
+                    {{field.label}}
+                </div>
+            </td>
+            <td>
+                <div class="form__group input" style="margin-bottom: -1%;">
+                    {{ field }}
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        </table>
+        <input class="blue_button" style="margin-left: -5%;" type="submit" value="Register"/>
+        
+    </form>
+    </center>
+
+</div>
+
+{% endblock content %}
+

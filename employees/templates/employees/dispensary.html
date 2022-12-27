@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="pg_head_container">
+    <element class="pg_head">Dispensary</element>
+</div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <form method="GET" action="{% url 'dispensary' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search Medicines...">
+            </form>
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'dispensary' %}"><button class="pst_filter">See All</button></a>
+        </td>
+        <td width="70%">
+            {% if perms.employees.add_dispensary %}
+            <a href="{% url 'add-to-dispensary'%}"><button class="blue_button">+ Add Medicine</button></a>
+            {% endif %}
+            
+            {% for item in items %}
+            <table class="pst_container" style="width: 80%; margin-left: 5%;">
+                <tr width=100%>
+                    <td width=85%>
+                        <div class="pst_title">{{ item.medicine }}</div>
+                        <div class="pst_txt">{{ item.category }} samples remaining.</div>
+                        <div class="pst_txt">{{ item.count }} samples remaining.</div>
+                        <div class="pst_txt">Expires on {{ item.expiry }}</div>
+                    </td>
+                    <td>
+                        {% if perms.employees.change_dispensary %}
+                        <a href="{% url 'update-dispensary-item' item.id %}"><button class="blue_button">Edit</button></a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if perms.employees.change_dispensary %}
+                        <a href="{% url 'deliver-dispensary-item' item.id %}"><button class="blue_button">Deliver</button></a>
+                        {% endif %}
+                    </td>
+                </tr>
+                
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+{% endblock content %}

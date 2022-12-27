@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="pg_head_container">
+    <element class="pg_head">{{ department }}</element>
+</div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width="70%">
+            <element class="subhead">{{benificiary_count}} results available.</element>
+            {% for benificiary in benificiaries %}
+            <table class="pst_container" style="width: 90%; margin-left: 5%;">
+                <tr>
+                    <td width=80% rowspan="2">
+                        <div class="pst_title">{{ benificiary.first_name }} {{ benificiary.last_name }}</div>
+                        <div class="pst_txt">{{ benificiary.age }}</div>
+                    </td>
+                    <td colspan="3">
+                        <element class="pst_funds">{{ benificiary.department.name }}</element>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    {% if request.user.is_authenticated %}
+                    <td>
+                        {% if perms.employees.change_benificiary %}                      
+                        <a href="{% url 'update-benificiary' benificiary.id %}"><button class="blue_button">Edit</button></a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if perms.employees.delete_benificiary %}
+                        <a href="{% url 'remove-benificiary' benificiary.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                        {% endif %}
+                    </td>
+                    {% endif %}
+                </tr>
+                
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+
+{% endblock content %}

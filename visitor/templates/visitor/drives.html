@@ -1,0 +1,55 @@
+{% extends 'main.html' %} {% block content %}
+{%load mathfilters %}
+
+<div class="pg_head_container">
+  <element class="pg_head">Active Drives</element>
+</div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+  <tr>
+      <td width=30% style="vertical-align: top; padding-right: 5%;">
+          <element class="subhead">Search</element>
+          <element class="pg_txt">{{ drive_count }} open drives.</element>
+          <form method="GET" action="{% url 'vis-drives' %}">
+              <input class="usr_rect" type="search" name="q" placeholder="Search Drives...">
+          </form>
+          
+          <element class="subhead">Useful for you</element>
+          <a href="{% url 'vis-drives' %}"><button class="pst_filter">See All</button></a>
+          
+        </td>
+        <td width="70%">         
+          {% for drive in drivess %}
+          <table class="pst_container" style="width: 80%; margin-left: 5%;">
+            <tr>
+                <td width="55%">
+                    <element class="pst_title" id="pst_title">
+                      {{ drive.name }}
+                    </element>
+                </td>
+                <td>
+                    <element class="pst_prgrs">
+                      {{ drive.collected_funds|div:drive.required_funds|mul:"100"|floatformat:0 }}%<br><element style="color:black">Complete</style>
+                    </element>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <element class="pst_txt" id="pst_txt">{{ drive.description }}</element>
+                    <element class="pst_txt" style="display: block; font-size: 18px; margin-top: 0%;">{{ drive.start_date }}</element>
+                </td>
+                <td style="vertical-align: top;">
+                    <element class="pst_funds" id="pst_funds">PKR {{drive.required_funds}}</element>
+                    <element class="pst_txt" id="pst_txt">Collectd PKR {{drive.collected_funds}}</element>
+                    <a href="{% url 'donate' %}?q={{drive.name}}"><button class="blue_button" style="width: 50%;">Donate</button></a>
+                   
+                </td>
+            </tr>  
+              
+          </table>
+          {% endfor %}
+      </td>
+  </tr>
+</table>
+
+{% endblock content %}

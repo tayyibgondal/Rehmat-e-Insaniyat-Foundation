@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<center>
+    <div class="pst_container" style="width: 50%; margin: 8%;" action="{% url 'deliver-blood-item' blood_id %}">
+        <form method="POST" action="">
+        {% csrf_token %}
+        <element class="pst_title" style="margin-bottom: 0%;">Deliver Blood Samples</element>
+        <element class="pst_txt">Enter the number of {{ blood_group }} blood samples you want to deliver.</element>
+        <input type="text" class="usr_rect" style="width: 50%; display: block;" name="count" placeholder="20"/>
+        <input type="submit" class="blue_button" value="Deliver"/>
+    </form>
+    <a href="{{ request.META.HTTP_REFERER }}"><button class="blue_button">Cancel</button></a>
+    </div>
+</center>
+{% endblock content %}

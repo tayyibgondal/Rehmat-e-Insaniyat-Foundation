@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="pg_head_container">
+    <element class="pg_head">Blood Bank</element>
+</div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <form method="GET" action="{% url 'blood-bank' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search Blood Bank...">
+            </form>
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'blood-bank' %}"><button class="pst_filter">See All</button></a>
+        </td>
+        <td width="70%">
+            {% if perms.employees.add_inventory %}
+            <a href="{% url 'add-to-blood-bank'%}"><button class="blue_button">+ Add Item</button></a>
+            {% endif %} 
+            
+            {% for item in items %}
+            <table class="pst_container" style="width: 80%; margin-left: 5%;">
+                <tr width=100%>
+                    <td width=85%>
+                        <div class="pst_title">{{ item.bloodType }}</div>
+                        <div class="pst_txt">{{ item.count }} samples remaining.</div>
+                    </td>
+                    <td>
+                        {% if perms.employees.change_inventory %}
+                        <a href="{% url 'deliver-blood-item' item.id %}"><button class="blue_button">Deliver</button></a>
+                        {% endif %} 
+                    </td>
+                </tr>
+                
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+
+{% endblock content %}

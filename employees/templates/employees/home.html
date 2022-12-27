@@ -1,0 +1,139 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="pg_head_container" style="width: 75%;">
+    <element class="pg_head">Welcome, @{{user.username}}!</element>
+    <element class="pg_txt">{{ user.first_name }} {{ user.last_name }}
+    <br> {{ user.email }}
+    <br> {{ user.role }}
+    <a href="{% url 'edit-profile' request.user.id %}"><element class="pg_txt_hyper" style="display: block;">Edit</element></a>
+    </element>
+</div>
+<element class="pst_txt" style="padding-bottom: 0%;">{{ employee.email }}</element>
+
+
+<div class="pg_head_container" style="width: 90%; padding-bottom: 5%;">
+    <div class="pg_head">
+        Your NGO in a Glimpse
+    </div>
+</div>
+<div style="margin-left: 5%;">
+    <table width=100%>
+        <tr>
+            <td width=50% style="vertical-align: top;" data-aos=fade-up data-aos-duration=1000 data-aos-offset=50>
+                <div class="subhead" style="display: inline-block; margin-right: 2.5%;">
+                    Donations
+                </div>
+                <a href="{% url 'donations' %}">
+                    <element class="pg_txt pg_txt_hyper" style="font-size: 20px; display: inline-block; margin-right: 3%;">
+                        See more >
+                    </element>
+                </a>
+                <div class="stats_container">
+                    <div class="bigcount">
+                        PKR {{donations_sum}}
+                    </div>
+                    <element class="subhead_thinned" style="margin-left: 5%;">
+                        Recent Donations 
+                        {% if donations_sum == 0 %}
+                        <div class="error" style="padding: 1%; width: 95%; margin-left: 0%;">No data to show.</div>
+                        {% else %}
+                        {% for donation in recent_donations %}
+                        <table style="width: 95%; margin-top: 5%; margin-left: -2.5%;">
+                            <tr>
+                                <td width = 50%>
+                                    <div class="pst_title" style="font-size: 15px;">{{ donation.donor.first_name }} {{ donation.donor.last_name }}</div>
+                                    <element class="pst_txt" style="padding-bottom: 0%; font-size: 11px;">{{ donation.department.name }}, {{ donation.drive.name }}</element>
+                                </td>
+                                <td align=right>
+                                    <div class="pst_funds" style="font-size: 18px;">PKR {{ donation.amount }}</div>
+                                </td>
+                            </tr>
+                        </table>
+                        {% endfor %}
+                        {% endif %}
+                    </element>  
+                </div>
+            </td>
+            <td width=50% style="vertical-align: top;" data-aos=fade-up data-aos-duration=1000 data-aos-offset=50>
+                <div class="subhead" style="display: inline-block; margin-right: 2.5%;">
+                    Volunteers
+                </div>
+                <a href="{% url 'volunteers' %}">
+                    <element class="pg_txt pg_txt_hyper" style="font-size: 20px; display: inline-block; margin-right: 3%;">
+                        See more >
+                    </element>
+                </a>
+                <div class="stats_container">
+                    <div class="bigcount">
+                        {{volunteers_sum}} volunteers
+                    </div>
+                    <element class="subhead_thinned" style="margin-left: 5%;">
+                        Recent Hirings
+                        {% if donations_sum == 0 %}
+                        <div class="error" style="padding: 1%; width: 95%; margin-left: 0%;">No data to show.</div>
+                        {% else %}
+                        {% for volunteer in recent_volunteers %}
+                        <table style="width: 95%; margin-top: 5%; margin-left: -2.5%;">
+                            <tr>
+                                <td width=60% rowspan="2">
+                                    <div class="pst_title" style="font-size: 15px;">{{ volunteer.first_name }} {{ volunteer.last_name }}</div>
+                                    <div class="pst_txt" style="padding-bottom: 0%; font-size: 11px;">{{ volunteer.email }}, {{ volunteer.phone_no }}</div>
+                                </td>
+                                <td colspan="3" align=right>
+                                    {% if volunteer.available %}
+                                    <element class="pst_funds" style="font-size: 18px;">Available</element></h3>
+                                    {% else %}
+                                    <element class="pst_funds" style="font-size: 18px;">Unavailable</element></h3>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            
+                        </table>
+                        {% endfor %}
+                    </element>
+                    {% endif %}
+                </div>
+            </td>
+            </tr>
+            <tr>
+            <td data-aos=fade-up data-aos-duration=1000 data-aos-offset=50>
+                <div class="subhead">
+                    Inventory
+                </div>
+                <div class="stats_container">
+                    <div class="bigcount">
+                        {{items_sum}} items in stock.
+                    </div>
+                    <element class="subhead_thinned" style="margin-left: 5%;">
+                        Running Outs
+                        {% for item in items_to_runout %}
+                        <table style="width: 100%; margin-top: 5%; margin-left: -2.5%;">
+                          <tr>
+                            <td width="80%">
+                                <element class="pst_title" id="pst_title" style="font-size: 15px;">
+                                    {{ item.item_name }}
+                                </element>
+                                <element class="pst_txt" style="padding-bottom: 0%; font-size: 11px;">Donated by {{ item.donation.donor.first_name }} {{ item.donation.donor.last_name }}</element>
+                                
+                            </td>
+                            <td >
+                                <element class="pst_txt" id="pst_txt" style="font-size: 18px;">{{ item.item_count }} in stock.</element>
+                                </td>
+                          </tr>
+                            
+                        </table>
+                        {% endfor %}
+                    </element>
+                    <div class="success" style="padding: 1%; width: 90%; margin-left: 5%;">You're running out of nothing currently.</div>
+                </div>
+            </td>
+            <td>
+
+            </td>
+        </tr>
+    </table>    
+</div>
+
+{% endblock content %}

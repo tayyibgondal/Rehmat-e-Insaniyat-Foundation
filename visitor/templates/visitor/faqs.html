@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="pg_head_container">
+    <element class="pg_head">Frequently Asked Questions</element>
+</div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <form method="GET" action="{% url 'vis-faqs' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search FAQs...">
+            </form>
+            
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'vis-faqs' %}"><button class="pst_filter">See All</button></a>
+        </td>
+        <td width="70%">
+            {% if request.user.is_authenticated %}
+            {% else %}
+            <a href="{% url 'ask-question' %}"><button class="blue_button">+ Ask a question</button></a>
+            {% endif %}
+            <div class="pst_container" style="margin-left: 5%; width: 90%;">
+            <table style="margin-left: 5%;" > 
+                {% for faq in faqss %}
+                    {% if faq.answer == '' or faq.answer == None %}
+                    {% else %}
+                    <tr>
+                        <td width=5%>
+                            <div class="question">
+                                Q. 
+                            </div>
+                        </td>
+                        <td>
+                            <div class="question">
+                                {{ faq.question }}
+                            </div>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>    
+                    <tr>
+                        <td style="vertical-align: top;">
+                            <div class="question">
+                                A. 
+                            </div>
+                        </td>
+                        <td>
+                            <div class="answer">{{ faq.answer }}</div>
+                        </td>
+                    </tr>   
+                    {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        </td>
+    </tr>
+</table>
+{% endblock content %}

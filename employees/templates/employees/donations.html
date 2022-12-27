@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="pg_head_container">
+    <element class="pg_head">Donations</element>
+</div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <form method="GET" action="{% url 'donations' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search Donations...">
+            </form>
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'donations' %}"><button class="pst_filter">See All</button></a>
+        </td>
+        <td width="70%">
+            {% for donation in donations %}
+            <table class="pst_container" style="width: 80%; margin-left: 5%;">
+                <tr>
+                    <td>
+                        <div class="pst_title">{{ donation.donor.first_name }} {{ donation.donor.last_name }}</div>
+                        <element class="pst_txt" style="padding-bottom: 0%;">{{ donation.department.name }}, {{ donation.drive.name }}</element>
+                        <element class="pst_txt" style="display: block; font-size: 18px; margin-top: 0%;">{{donation.date }}</element>
+                    </td>
+                    <td>
+                        <div class="pst_funds">PKR {{ donation.amount }}</div>
+                    </td>
+                </tr>
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+
+{% endblock content %}

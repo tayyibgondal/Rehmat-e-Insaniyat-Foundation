@@ -1,0 +1,13 @@
+{% extends 'main.html' %} 
+{% block content %}
+
+<a href="{% url 'vis-team' %}"><button class="blue_button">Go back</button></a>
+<div class="pg_head_container">
+    <element class="pg_head">{{ employee.first_name }} {{ employee.last_name }}</element>
+    <element class="pg_txt">{{ employee.role }}</element>
+</div>
+<element class="pst_txt" style="padding-bottom: 0%; width: 50%;">{{ employee.description }}</element>
+<element class="pst_txt" style="padding-bottom: 0%;">{{ employee.email }}</element>
+<element class="pst_txt" style="display: block; font-size: 18px; margin-top: 0%;">Joined {{ employee.date_joined }}</element>
+
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="pg_head_container">
+    <element class="pg_head">Departments</element>
+</div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <form method="GET" action="{% url 'vis-departments' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search Departments...">
+            </form>
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'vis-departments' %}"><button class="pst_filter">See All</button></a>
+        </td>
+        <td width="70%">            
+            {% for department in departments %}
+            <table class="pst_container" style="width: 80%; margin-left: 5%;">
+                <tr>
+                    <td width=60%>
+                        <div class="pst_title">{{ department.name }}</div>
+                        <div class="pst_txt">{{ department.description }}</div>
+                        <a href="{% url 'donate' %}?q={{department.name}}"><button class="blue_button" style="width: 50%;">Donate</button></a>
+                    </td>
+                    
+                </tr>
+                
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+
+{% endblock content %}

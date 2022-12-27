@@ -1,0 +1,55 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="pg_head_container">
+    <element class="pg_head">Departments</element>
+</div>
+
+<table id="pg_divider" style="margin: 5%; width:90%">
+    <tr>
+        <td width=30% style="vertical-align: top; padding-right: 5%;">
+            <element class="subhead">Search</element>
+            <form method="GET" action="{% url 'departments' %}">
+                <input class="usr_rect" type="search" name="q" placeholder="Search Departments...">
+            </form>
+            <element class="subhead">Useful for you</element>
+            <a href="{% url 'departments' %}"><button class="pst_filter">See All</button></a>
+        </td>
+        <td width="70%">
+            {% if request.user.is_authenticated %}
+                {% if perms.employees.add_department %}
+                <a href="{% url 'create-department'%}"><button class="blue_button">+ Add Department</button></a>
+                {% endif %} 
+            {% endif %}
+            
+            {% for department in departments %}
+            <table class="pst_container" style="width: 80%; margin-left: 5%;">
+                <tr>
+                    <td width=60%>
+                        <div class="pst_title">{{ department.name }}</div>
+                        <div class="pst_txt">{{ department.description }}</div>
+                    </td>
+                    {% if request.user.is_authenticated %}
+                    <td width=30%>
+                        <a href="{% url 'view-department-beneficiaries' department.name %}"><button class="blue_button">View Beneficiaries</button></a>
+                    </td>
+                    <td width=30%>
+                        {% if perms.employees.change_department %}
+                        <a href="{% url 'update-department' department.id %}"><button class="blue_button">Edit</button></a>
+                        {% endif %} 
+                    </td>
+                    <td>
+                        {% if perms.employees.delete_department %}
+                        <a href="{% url 'remove-department' department.id %}"><button class="blue_button" style="background-color: #f30505;">Remove</button></a>
+                        {% endif %} 
+                    </td>
+                    {% endif %}
+                </tr>
+                
+            </table>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+
+{% endblock content %}

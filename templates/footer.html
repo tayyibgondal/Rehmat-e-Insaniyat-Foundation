@@ -1,0 +1,38 @@
+{% load static %}
+{% if user.is_authenticated %}
+<element class="copyrt">Copyright 2022 Rehmat-e-Insaniyat Inc.</element>
+
+{% else %}
+<div class="main_ft" style="overflow: hidden;">
+    <img src="{% static 'images/logo1.png' %}" style="opacity: 50%; margin-left: 70%; overflow: hidden; position: absolute;" width="500px">
+    <table class="foottable" width = 95% style="opacity: 100%;">
+        <tr>
+            <td colspan="2" style="padding-bottom: 1%;"><element style="background-color: #023483; padding: 2%; padding-top: 1%; padding-bottom: 1%;" class="foothead">rehmateinsaniyat@gmail.com</element></td>
+        </tr>
+        <tr>
+            <td width=25% style="vertical-align: top;">
+                <element class="foothead">Know Us</element>
+                <element class="footlink">ADDRESS: Office Opposite Shell Pump, Mandi Bahauddin Road, Malakwal District, Mandibhauddin</element>
+                <element class="footlink">Zipcode  50530</element>
+                <element class="footlink">+92-302-6707069</element>
+                <element class="footlink">+92-345-6330066</element>
+            </td>
+            <td width=25% style="vertical-align: top;">    
+                <element class="foothead">Useful Links</element>
+                <a href="{% url 'visitor-home' %}"><element class="footlink">Home</element></a>
+                <a href="{% url 'contact-us' %}"><element class="footlink">Contact Us</element></a>
+                <a href="{% url 'donate' %}"><element class="footlink">Donate</element></a>
+                <a href="{% url 'vis-blogs' %}"><element class="footlink">News & Blogs</element></a>
+                <a href="{%url 'vis-faqs'%}"><element class="footlink">FAQs</element></a>
+                <a href="{%url 'vis-drives'%}"><element class="footlink">Our Projects</element></a>
+                <a href="{% url 'subscribe' %}"><button class="goldbtn" style="float: none; margin-bottom: 3%; margin-top: 3%;">Subscribe</button></a><br>
+                <a href="{% url 'login' %}">
+                    <button class="loginbtn" style="float: none;">Employee Login</button>
+                </a>
+                
+            </td>
+        </tr>
+    </table>
+</div>
+<element class="copyrt">Copyright 2022 Rehmat-e-Insaniyat Inc.</element>
+{% endif %}
